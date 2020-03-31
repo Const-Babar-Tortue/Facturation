@@ -18,6 +18,7 @@ from .logout import logout_routes
 
 # API
 from .api.bills import bill_route
+from .api.testing import gen_route
 
 
 def init_app():
@@ -33,6 +34,7 @@ def init_app():
 
     # API
     app.register_blueprint(bill_route.bill_api_bp)
+    app.register_blueprint(gen_route.gen_api_bp)
 
     db.init_app(app)
     login_manager.init_app(app)
