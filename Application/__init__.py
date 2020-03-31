@@ -1,6 +1,6 @@
 from flask import Flask
-from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
+from flask_sqlalchemy import SQLAlchemy
 
 db = SQLAlchemy()
 login_manager = LoginManager()
@@ -14,9 +14,10 @@ from .login import login_routes
 from .logout import logout_routes
 from .static import bootstrap_routes
 
+
 def init_app():
     app = Flask(__name__, instance_relative_config=False, template_folder="templates", static_folder="static")
-    app.config.from_object('config.Config')
+    app.config.from_object("config.Config")
 
     app.register_blueprint(home_routes.home_bp)
     app.register_blueprint(contact_routes.contact_bp)
@@ -29,7 +30,6 @@ def init_app():
     login_manager.init_app(app)
 
     with app.app_context():
-
         db.create_all()
 
         return app
