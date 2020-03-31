@@ -8,6 +8,6 @@ home_bp = Blueprint("home_bp", __name__, template_folder="templates", static_fol
 
 @home_bp.route("/", methods=["GET"])
 @login_required
-def create_image():
+def home():
     users = User.query.all()
     return render_template("home.html", users=users, title="Show FormModel")

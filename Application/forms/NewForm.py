@@ -2,7 +2,7 @@ from wtforms import StringField, SubmitField, Form, PasswordField
 from wtforms.validators import DataRequired, Length, Email, EqualTo, Optional
 
 
-class SignInForm(Form):
+class NewForm(Form):
     name = StringField("Name", [DataRequired()])
     email = StringField(
         "Email",
