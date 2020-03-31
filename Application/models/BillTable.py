@@ -8,8 +8,8 @@ class Bill(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
 
-    user = db.column(db.Integer, db.ForeignKey(User.id), nullable=False)
-    client = db.column(db.Integer, db.ForeignKey(Client.id), nullable=False)
+    user = db.column(db.Integer, db.ForeignKey(User.id))
+    client = db.column(db.Integer, db.ForeignKey(Client.id))
 
     number = db.Column(db.Integer, nullable=False)
     date = db.Column(db.Date, nullable=False)
