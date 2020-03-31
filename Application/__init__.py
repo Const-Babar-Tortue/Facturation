@@ -9,7 +9,7 @@ login_manager = LoginManager()
 # a circular import
 from .home import home_routes
 from .contact import contact_routes
-from .signin import signin_routes
+from .new import new_routes
 from .login import login_routes
 from .logout import logout_routes
 
@@ -20,7 +20,7 @@ def init_app():
 
     app.register_blueprint(home_routes.home_bp)
     app.register_blueprint(contact_routes.contact_bp)
-    app.register_blueprint(signin_routes.signin_bp)
+    app.register_blueprint(new_routes.new_bp)
     app.register_blueprint(login_routes.login_bp)
     app.register_blueprint(logout_routes.logout_bp)
 
