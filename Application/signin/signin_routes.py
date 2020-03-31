@@ -35,7 +35,7 @@ def signin():
             login_user(user)
             return redirect(url_for("home_bp.create_image"))
 
-    return render_template("signin.html", form=form, title="Create an Account")
+    return render_template("signup.html", form=form, title="Create an Account")
 
 
 @login_manager.user_loader
