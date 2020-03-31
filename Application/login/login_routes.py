@@ -11,7 +11,7 @@ login_bp = Blueprint("login_bp", __name__, template_folder="templates", static_f
 @login_bp.route("/login", methods=["GET", "POST"])
 def login():
     if current_user.is_authenticated:
-        return redirect(url_for("home_bp.create_image"))
+        return redirect(url_for("home_bp.home"))
 
     form = LoginForm(request.form)
     if request.method == "POST":
@@ -21,7 +21,7 @@ def login():
             user = User.query.filter_by(email=email).first()
             if user and user.check_password(password=password):
                 login_user(user)
-                return redirect(url_for("home_bp.create_image"))
+                return redirect(url_for("home_bp.home"))
         flash("Invalid username/password")
         return redirect(url_for("contact_bp.contact"))
 

@@ -5,7 +5,7 @@ from flask_login import login_user
 from werkzeug.security import generate_password_hash
 
 from Application import db, login_manager
-from Application.forms.SignInForm import SignInForm
+from Application.forms.NewForm import NewForm
 from Application.models.UserTable import User
 
 new_bp = Blueprint("new_bp", __name__, template_folder="templates", static_folder="static")
@@ -13,7 +13,7 @@ new_bp = Blueprint("new_bp", __name__, template_folder="templates", static_folde
 
 @new_bp.route("/new", methods=["POST", "GET"])
 def new():
-    form = SignInForm(request.form)
+    form = NewForm(request.form)
     if request.method == "POST" and form.validate():
         name = request.form.get("name")
         email = request.form.get("email")
@@ -33,7 +33,7 @@ def new():
             db.session.add(user)
             db.session.commit()
             login_user(user)
-            return redirect(url_for("home_bp.create_image"))
+            return redirect(url_for("home_bp.home"))
 
     return render_template("signup.html", form=form, title="Create an Account")
 
