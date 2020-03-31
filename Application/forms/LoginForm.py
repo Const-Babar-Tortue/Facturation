@@ -3,6 +3,6 @@ from wtforms.validators import DataRequired, Email
 
 
 class LoginForm(Form):
-    email = StringField(id="email", validators=[DataRequired(), Email(message="Enter a valid email")])
-    password = PasswordField(id="password", validators=[DataRequired()])
+    email = StringField("email", validators=[DataRequired(), Email(message="Enter a valid email")])
+    password = PasswordField("password", validators=[DataRequired()])
     submit = SubmitField("Log In")

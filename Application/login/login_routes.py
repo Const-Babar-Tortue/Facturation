@@ -27,6 +27,7 @@ def login():
                 print("Invalid username/password")
                 return render_template("login.html", error="Invalid username/password", title="Log in.")
         else:
+            flash(form.errors)
             print("Invalid input")
             return render_template("login.html", error="Invalid input", title="Log in.")
 
