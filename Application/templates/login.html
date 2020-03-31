@@ -1,12 +1,11 @@
 {% extends '_base.html' %}
 
 {% block content %}
-    <div class="form" align="center">
+    <div class="form">
         <form method="POST" action="/login">
             <h1>Log In</h1>
             <div class="form-field">
                 {{ form.email.label }}
-                <br>
                 {{ form.email }}
                 {% if form.email.errors %}
                     <ul class="errors">
@@ -16,10 +15,8 @@
                     </ul>
                 {% endif %}
             </div>
-            <br>
             <div class="form-field">
                 {{ form.password.label }}
-                <br>
                 {{ form.password }}
                 {% if form.password.errors %}
                     <ul class="errors">
@@ -29,7 +26,6 @@
                     </ul>
                 {% endif %}
             </div>
-            <br>
             <div class="submit">
                 <input id='submit' type="submit" value="Submit">
             </div>
