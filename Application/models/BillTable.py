@@ -8,8 +8,11 @@ class Bill(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
 
-    user = db.column(db.Integer, db.ForeignKey(User.id), nullable=False)
-    client = db.column(db.Integer, db.ForeignKey(Client.id), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey(User.id))
+    client_id = db.Column(db.Integer, db.ForeignKey(Client.id))
+
+    # user = db.relationship('User', foreign_keys='Bills.user_id')
+    # client = db.relationship('Client', foreign_keys='Bills.client_id')
 
     number = db.Column(db.Integer, nullable=False)
     date = db.Column(db.Date, nullable=False)
