@@ -21,11 +21,18 @@ def login():
             user = User.query.filter_by(email=email).first()
             if user and user.check_password(password=password):
                 login_user(user)
+                print("logged in")
                 return redirect(url_for("home_bp.home"))
-        flash("Invalid username/password")
-        return redirect(url_for("contact_bp.contact"))
+            else:
+                print("Invalid username/password")
+                return render_template("login.html", error="Invalid username/password", title="Log in.")
+        else:
+            flash(form.errors)
+            print("Invalid input")
+            return render_template("login.html", error="Invalid input", title="Log in.")
 
-    return render_template("login.html", form=form, title="Log in.")
+    elif request.method == "GET":
+        return render_template("login.html", title="Log in.")
 
 
 @login_manager.user_loader
