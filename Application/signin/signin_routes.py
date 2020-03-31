@@ -6,7 +6,7 @@ from werkzeug.security import generate_password_hash
 
 from Application import db, login_manager
 from Application.forms.SignInForm import SignInForm
-from Application.models.users import User
+from Application.models.UserTable import User
 
 signin_bp = Blueprint("signin_bp", __name__, template_folder="templates", static_folder="static")
 

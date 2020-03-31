@@ -3,7 +3,7 @@ from flask_login import current_user, login_user
 
 from Application import login_manager
 from Application.forms.LoginForm import LoginForm
-from Application.models.users import User
+from Application.models.UserTable import User
 
 login_bp = Blueprint("login_bp", __name__, template_folder="templates", static_folder="static")
 
