@@ -8,11 +8,11 @@ from Application import db, login_manager
 from Application.forms.SignInForm import SignInForm
 from Application.models.UserTable import User
 
-signin_bp = Blueprint("signin_bp", __name__, template_folder="templates", static_folder="static")
+new_bp = Blueprint("new_bp", __name__, template_folder="templates", static_folder="static")
 
 
-@signin_bp.route("/signin", methods=["POST", "GET"])
-def signin():
+@new_bp.route("/new", methods=["POST", "GET"])
+def new():
     form = SignInForm(request.form)
     if request.method == "POST" and form.validate():
         name = request.form.get("name")
@@ -35,7 +35,7 @@ def signin():
             login_user(user)
             return redirect(url_for("home_bp.create_image"))
 
-    return render_template("signin.html", form=form, title="Create an Account")
+    return render_template("signup.html", form=form, title="Create an Account")
 
 
 @login_manager.user_loader
