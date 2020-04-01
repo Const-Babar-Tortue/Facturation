@@ -24,3 +24,7 @@ When the above is done, type in your terminal
 Allow you to stop and remove the containers used for this web application.
 
 > make stop
+
+# Api documentation
+
+<https://const-babar-tortue.github.io/Flask-Server/>
