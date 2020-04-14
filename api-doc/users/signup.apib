@@ -5,31 +5,15 @@
 ### Create New User [POST]
 
 + Request (application/json)
-
-    + Body
-
-
-            {
-                "username": "babar",
-                "password": "tortue",
-                "email": "michel@seeds-it.eu"
-            }
-
+    + Attributes (object)
+        + username: babar (string)
+        + password: tortue (string)
+        + email: michel@seed-it.eu (string)
+      
 + Response 200 (application/json)
-
-   + Body
-
-
-            {
-                "message": "Created"
-            }
+    + Attributes (object)
+        + message: Created (string)
 
 + Response 409 (application/json)
-
-    + Body
-
-          
-            {
-                "message": "User already exists"
-            }
-            
+    + Attributes (object)
+        + message: User already exists (string)

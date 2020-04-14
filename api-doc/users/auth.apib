@@ -1,3 +1,17 @@
+# Data Structures
+
+## Login (object)
++ username: babar (string)
++ password: tortue (string)
+
+## Token (object)
++ token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c (string)
+
+## InvalidCredentials (object)
++ description: Invalid credentials (string),
++ error: Bad Request (string),
++ status_code: 401 (number)
+
 # Group auth
 
 ## Authenticate user [/auth]
@@ -5,40 +19,11 @@ Authenticate one user to access protected routes.
 
 ### Authenticate a user [POST]
 
-::: note
-#### <i class="fa fa-info"></i> Info
-Once the user's authentication has been successfully, he/she must login with correct credentials
-to obtain a JWT token sent in the `the response body`. This token will be used to
-access protected routes.
-:::
-
 + Request (application/json)
-
-    + Body
-
-
-            {
-                "username": "babar",
-                "password": "tortue"
-            }
+    + Attributes (Login)
 
 + Response 200 (application/json)
-
-   + Body
-
-
-            {
-                "access_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1jiJ9.eyJleHAiOjE1kDYrMjQxMz7sImlhdCI6MTU4NjgyMzgzMSwibmJmIjoxNTg2ODIzODMxLCJpZGVudGl0eSI6MX0.BY0Ob1-fO-NTQaOc1G_W0bJJmfBSzv-qY0krQ_ApmHQ"
-            }
+    + Attributes (Token)
 
 + Response 401 (application/json)
-
-    + Body
-
-
-            {
-                "description": "Invalid credentials",
-                "error": "Bad Request",
-                "status_code": 401
-            }
-
+    + Attributes (InvalidCredentials)
