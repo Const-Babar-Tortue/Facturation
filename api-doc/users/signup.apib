@@ -1,0 +1,35 @@
+# Group signup
+
+## Create an account [/signup]
+
+### Create New User [POST]
+
++ Request (application/json)
+
+    + Body
+
+
+            {
+                "username": "babar",
+                "password": "tortue",
+                "email": "michel@seeds-it.eu"
+            }
+
++ Response 200 (application/json)
+
+   + Body
+
+
+           {
+               "message": "Created"
+           }
+
++ Response 409 (application/json)
+
+    + Body
+
+          
+           {
+               "message": "User already exists"
+           }
+            
