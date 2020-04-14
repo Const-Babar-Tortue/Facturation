@@ -8,12 +8,10 @@ class User(UserMixin, db.Model):
     __tablename__ = "Users"
 
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(40), nullable=False, unique=False)
+    username = db.Column(db.String(40), nullable=False, unique=False)
     email = db.Column(db.String(40), unique=True, nullable=False)
     password = db.Column(db.String(200), primary_key=False, unique=False, nullable=False)
-    website = db.Column(db.String(60), index=False, unique=False, nullable=True)
     created_on = db.Column(db.DateTime, index=False, unique=False, nullable=True)
-    last_login = db.Column(db.DateTime, index=False, unique=False, nullable=True)
 
     def set_password(self, password):
         """Create hashed password."""
@@ -24,4 +22,4 @@ class User(UserMixin, db.Model):
         return check_password_hash(self.password, password)
 
     def __repr__(self):
-        return "<User {}>".format(self.name)
+        return "<User {}>".format(self.username)

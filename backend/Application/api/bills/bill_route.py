@@ -1,16 +1,13 @@
-from flask import Blueprint, jsonify, request, flash
+from flask import jsonify, request
 from flask_jwt import jwt_required, current_identity
 
 from Application.models.BillTable import Bill
 from Application.models.ClientTable import Client
 
-bill_api_bp = Blueprint("bill_api_bp", __name__)
-
 
 # list bills for logged in user
-@bill_api_bp.route("/bill", methods=["GET"])
 @jwt_required()
-def bill():
+def get_bill():
     user_id = current_identity.id
 
     results = Bill.query.filter(Bill.user_id == user_id)
