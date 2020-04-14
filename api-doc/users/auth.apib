@@ -3,7 +3,7 @@
 ## Authenticate user [/auth]
 Authenticate one user to access protected routes.
 
-### Create New User [POST]
+### Authenticate a user [POST]
 
 ::: note
 #### <i class="fa fa-info"></i> Info
@@ -16,6 +16,7 @@ access protected routes.
 
     + Body
 
+
             {
                 "username": "babar",
                 "password": "tortue"
@@ -25,17 +26,19 @@ access protected routes.
 
    + Body
 
-           {
-               "access_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1jiJ9.eyJleHAiOjE1kDYrMjQxMz7sImlhdCI6MTU4NjgyMzgzMSwibmJmIjoxNTg2ODIzODMxLCJpZGVudGl0eSI6MX0.BY0Ob1-fO-NTQaOc1G_W0bJJmfBSzv-qY0krQ_ApmHQ"
-           }
+
+            {
+                "access_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1jiJ9.eyJleHAiOjE1kDYrMjQxMz7sImlhdCI6MTU4NjgyMzgzMSwibmJmIjoxNTg2ODIzODMxLCJpZGVudGl0eSI6MX0.BY0Ob1-fO-NTQaOc1G_W0bJJmfBSzv-qY0krQ_ApmHQ"
+            }
 
 + Response 401 (application/json)
 
     + Body
 
-           {
-               "description": "Invalid credentials",
-               "error": "Bad Request",
-               "status_code": 401
-           }
+
+            {
+                "description": "Invalid credentials",
+                "error": "Bad Request",
+                "status_code": 401
+            }
 
