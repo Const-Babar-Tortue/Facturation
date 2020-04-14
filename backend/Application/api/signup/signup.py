@@ -30,7 +30,7 @@ class Signup(Resource):
 
         if existing_user:
             response = jsonify({"message": "User already exists"})
-            response.status_code = 401
+            response.status_code = 409
             return response
 
         user = User(
