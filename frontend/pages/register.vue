@@ -49,7 +49,6 @@
                         type="password"
                         label="Password confirmation"
                         v-model="confirmation"
-                        description="We'll never share your password with anyone else"
                         placeholder="Confirm password"
                     />
 
@@ -62,13 +61,29 @@
 
 <script>
     import {ValidationObserver, extend} from "vee-validate";
-    import {required, email, confirmed, min} from 'vee-validate/dist/rules';
+    import {required, email, confirmed} from 'vee-validate/dist/rules';
 
     // No message specified.
-    extend('email', email);
-    extend('confirmed', confirmed);
-    extend('min', min);
-    extend('required', required);
+    extend('email', {
+        ...email,
+        message: 'The {_field_} field must be a valid email'
+    })
+    extend('confirmed', {
+        ...confirmed,
+        message: 'Both passwords do not match'
+    })
+    extend('min', {
+        validate(value, {length}) {
+            return value.length >= length;
+        },
+        params: ['length'],
+        message: 'The {_field_} field must have at least {length} characters'
+    })
+    extend('required', {
+        ...required,
+        message: 'The {_field_} field is required'
+    });
+
 
     import Centered from '@/components/Centered'
     import BTextInputWithValidation from '@/components/BTextInputWithValidation'
@@ -101,15 +116,13 @@
                     email: this.email,
                     password: this.password
                 }).then(_ =>
-                    this.succeed()
+                    this.$router.push('/')
                 ).catch(e => {
                     if (e.exists) this.exists = true
                     else this.error = true
                 })
             },
-            succeed() {
-                console.log("yeah")
-            }
+
         }
     }
 </script>
