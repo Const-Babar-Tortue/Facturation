@@ -87,10 +87,10 @@
 
     import Centered from '@/components/Centered'
     import BTextInputWithValidation from '@/components/BTextInputWithValidation'
-    import SignupService from '@/services/SignupService.js'
+    import RegisterService from '@/services/RegisterService.js'
 
     export default {
-        name: "SignupForm",
+        name: "RegisterForm",
         components: {
             Centered,
             ValidationObserver,
@@ -111,7 +111,7 @@
                 this.register()
             },
             register() {
-                SignupService.register({
+                RegisterService.register({
                     username: this.username,
                     email: this.email,
                     password: this.password

@@ -1,7 +1,7 @@
 from datetime import datetime
 
 from flask import jsonify
-from flask_jwt import jwt_required, current_identity
+from flask_jwt import current_identity
 from flask_restful import Resource, reqparse
 
 from Application import db
@@ -13,9 +13,7 @@ parser.add_argument('email', type=str)
 parser.add_argument('password', type=str)
 
 
-class Signup(Resource):
-    # decorators = [jwt_required()]
-
+class Register(Resource):
     def post(self):
         print(current_identity)
         args = parser.parse_args()
