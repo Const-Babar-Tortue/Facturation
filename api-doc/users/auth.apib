@@ -1,0 +1,29 @@
+# Data Structures
+
+## Login (object)
++ username: babar (string)
++ password: tortue (string)
+
+## Token (object)
++ token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c (string)
+
+## InvalidCredentials (object)
++ description: Invalid credentials (string),
++ error: Bad Request (string),
++ status_code: 401 (number)
+
+# Group auth
+
+## Authenticate user [/auth]
+Authenticate one user to access protected routes.
+
+### Authenticate a user [POST]
+
++ Request (application/json)
+    + Attributes (Login)
+
++ Response 200 (application/json)
+    + Attributes (Token)
+
++ Response 401 (application/json)
+    + Attributes (InvalidCredentials)

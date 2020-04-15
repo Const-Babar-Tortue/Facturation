@@ -1,0 +1,19 @@
+# Group signup
+
+## Create an account [/signup]
+
+### Create New User [POST]
+
++ Request (application/json)
+    + Attributes (object)
+        + username: babar (string)
+        + password: tortue (string)
+        + email: michel@seed-it.eu (string)
+      
++ Response 200 (application/json)
+    + Attributes (object)
+        + message: Created (string)
+
++ Response 409 (application/json)
+    + Attributes (object)
+        + message: User already exists (string)
