@@ -1,6 +1,6 @@
 <template>
     <b-container>
-        <b-button>Signin</b-button>
+        <b-button>Login</b-button>
     </b-container>
 </template>
 

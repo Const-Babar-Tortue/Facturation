@@ -8,7 +8,7 @@ import logging
 db = SQLAlchemy()
 
 # API
-from .api.signup.signup import Signup
+from .api.register.register import Register
 from .api.bills import bill_route
 
 app = Flask(__name__, instance_relative_config=False)
@@ -29,6 +29,6 @@ def init_app():
         from Application.api.jwt.jwt import authenticate, identity
         JWT(app, authenticate, identity)
 
-    api.add_resource(Signup, '/signup')
+    api.add_resource(Register, '/register')
 
     return app
