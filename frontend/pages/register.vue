@@ -60,10 +60,12 @@
 </template>
 
 <script>
-    import {ValidationObserver, extend} from "vee-validate";
-    import {required, email, confirmed} from 'vee-validate/dist/rules';
+    import {extend, ValidationObserver} from "vee-validate";
+    import {confirmed, email, required} from 'vee-validate/dist/rules';
+    import Centered from '@/components/Centered'
+    import BTextInputWithValidation from '@/components/BTextInputWithValidation'
+    import RegisterService from '@/services/RegisterService.js'
 
-    // No message specified.
     extend('email', {
         ...email,
         message: 'The {_field_} field must be a valid email'
@@ -85,12 +87,8 @@
     });
 
 
-    import Centered from '@/components/Centered'
-    import BTextInputWithValidation from '@/components/BTextInputWithValidation'
-    import RegisterService from '@/services/RegisterService.js'
-
     export default {
-        name: "RegisterForm",
+        name: "Register",
         components: {
             Centered,
             ValidationObserver,
