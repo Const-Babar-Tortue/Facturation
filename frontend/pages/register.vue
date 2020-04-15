@@ -1,82 +1,105 @@
 <template>
     <Centered>
         <b-card header="Create an account">
-            <b-form @submit.prevent="handleSubmit">
+            <ValidationObserver ref="observer" v-slot="{ passes }">
+                <b-form @submit.prevent="passes(onSubmit)">
 
-                <b-alert :show="exists" variant="danger" dismissible class="mt-3">
-                    A user with that username or email already exists
-                </b-alert>
+                    <b-alert :show="exists" variant="danger" dismissible class="mt-3">
+                        A user with that username or email already exists
+                    </b-alert>
 
-                <b-alert :show="error" variant="danger" dismissible class="mt-3">
-                    An error occurred while registering
-                </b-alert>
+                    <b-alert :show="error" variant="danger" dismissible class="mt-3">
+                        An error occurred while registering
+                    </b-alert>
 
-                <TextFormGroup
-                    id="username"
-                    label="Username:"
-                    v-model="form.username"
-                />
-                <TextFormGroup
-                    id="email"
-                    label="Email:"
-                    v-model="form.email"
-                />
-                <TextFormGroup
-                    id="password"
-                    label="Password:"
-                    v-model="form.password"
-                    type="password"
-                />
-                <TextFormGroup
-                    id="repeat-password"
-                    label="Repeat password:"
-                    v-model="form.repeatPassword"
-                    type="password"
-                />
 
-                <b-button type="submit" variant="primary">Submit</b-button>
-            </b-form>
+                    <BTextInputWithValidation
+                        rules="required|min:5"
+                        type="text"
+                        label="Username:"
+                        name="Username"
+                        v-model="username"
+                        placeholder="Enter a username"
+                    />
 
+                    <BTextInputWithValidation
+                        rules="required|email"
+                        type="email"
+                        label="Email address:"
+                        name="Email"
+                        v-model="email"
+                        description="We'll never share your email with anyone else"
+                        placeholder="Enter email"
+                    />
+
+                    <BTextInputWithValidation
+                        rules="required|min:6"
+                        name="Password"
+                        vid="password"
+                        type="password"
+                        label="Password"
+                        v-model="password"
+                        description="We'll never share your password with anyone else"
+                        placeholder="Enter password"
+                    />
+
+                    <BTextInputWithValidation
+                        rules="required|confirmed:password"
+                        name="Password confirmation"
+                        type="password"
+                        label="Password confirmation"
+                        v-model="confirmation"
+                        description="We'll never share your password with anyone else"
+                        placeholder="Confirm password"
+                    />
+
+                    <b-button type="submit" variant="primary">Submit</b-button>
+                </b-form>
+            </ValidationObserver>
         </b-card>
     </Centered>
 </template>
 
 <script>
-    // import Api from '@/api'
+    import {ValidationObserver, extend} from "vee-validate";
+    import {required, email, confirmed, min} from 'vee-validate/dist/rules';
+
+    // No message specified.
+    extend('email', email);
+    extend('confirmed', confirmed);
+    extend('min', min);
+    extend('required', required);
+
     import Centered from '@/components/Centered'
-    import TextFormGroup from '@/components/TextFormGroup'
+    import BTextInputWithValidation from '@/components/BTextInputWithValidation'
     import SignupService from '@/services/SignupService.js'
 
     export default {
         name: "SignupForm",
         components: {
             Centered,
-            TextFormGroup
+            ValidationObserver,
+            BTextInputWithValidation
         },
         data: () => ({
-            form: {
-                username: null,
-                email: null,
-                password: null,
-                repeatPassword: null,
-            },
+            username: null,
+            email: null,
+            password: null,
+            confirmation: null,
             exists: false,
             error: false
         }),
         methods: {
-            handleSubmit() {
+            onSubmit() {
                 this.exists = false
                 this.error = false
-                // TODO: validate
-                if (true) this.register()
+                this.register()
             },
             register() {
-
-
                 SignupService.register({
-                    username: this.form.username,
-                    email: this.form.email,
-                    password: this.form.password
+                    username: this.username,
+                    email: this.email,
+                    password: this.password
                 }).then(_ =>
                     this.succeed()
                 ).catch(e => {

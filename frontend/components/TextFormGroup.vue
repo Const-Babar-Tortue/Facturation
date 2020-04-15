@@ -1,21 +1,24 @@
 <template>
-    <div>
+    <ValidationProvider v-slot="v" rules="rules" v-slot="{ errors }">
         <b-form-group :id="id + '-group'" :label="label" :label-for="id">
             <b-form-input
                 :id="id"
                 v-model="innerValue"
                 :type="type"
             ></b-form-input>
-            <b-form-invalid-feedback :state="valid">
+            <b-form-invalid-feedback>
+                {{ errors[0] }}
             </b-form-invalid-feedback>
         </b-form-group>
-    </div>
-
+    </ValidationProvider>
 </template>
 
 <script>
+    import {ValidationProvider} from 'vee-validate';
+
     export default {
         name: "TextFormGroup",
+        components: {ValidationProvider},
         props: {
             id: {
                 type: String,
@@ -36,7 +39,8 @@
             type: {
                 type: String,
                 default: 'text'
-            }
+            },
+            rules: {type: String, required: true}
         },
         data: () => ({
             innerValue: null
