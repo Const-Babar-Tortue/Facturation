@@ -9,14 +9,17 @@ help:
 	@echo 'start|stop|restart|gen-api-doc'
 
 ## API
-start:
+api-start:
 	docker-compose up -d --build api
 
-stop:
+api-stop:
 	docker-compose down api
 
-restart:
-	docker restart api
+api-logs:
+	docker-compose logs api
+
+api-logs-follow:
+	docker-compose logs -f api
 
 ## API doc
 gen-api-doc:
