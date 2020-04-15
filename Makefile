@@ -21,12 +21,20 @@ api-logs:
 api-logs-follow:
 	docker-compose logs -f api
 
+# Run dev server with auto reload
+vue-dev:
+	cd frontend && yarn run dev
+
+# Generate static website inside frontend/dist directory
+vue-generate:
+	cd frontend && yarn run generate
+
 ## API doc
 gen-api-doc:
 	aglio -i $(api_blueprint_src) -o $(api_doc_output)\
 	    --theme-template=$(aglio_template) \
 	    --theme-variables=$(aglio_theme)
 
-## Frontend
+# Serve static output
 serve-static-test:
 	./weave 8090 to $(shell pwd)/frontend/dist
