@@ -44,6 +44,11 @@ export default {
     ** Build configuration
     */
     build: {
+        // Add exception
+        transpile: [
+            "vee-validate/dist/rules",
+            'vee-validate'
+        ],
         /*
         ** You can extend webpack config here
         */
