@@ -1,15 +1,7 @@
 export function setToken(token) {
-    if (process.browser) {
+    if (process.browser && token) {
         localStorage.setItem('token', token)
     }
-}
-
-// should only be run at initialization, use VueX store after
-export function getToken() {
-    if (process.browser) {
-        return localStorage.getItem('token')
-    }
-    return null
 }
 
 export function clearToken() {
@@ -18,4 +10,4 @@ export function clearToken() {
     }
 }
 
-export default {setToken, getToken, clearToken}
+export default {setToken, clearToken}
