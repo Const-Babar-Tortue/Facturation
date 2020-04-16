@@ -1,7 +1,7 @@
-import {getToken, clearToken, setToken} from "@/services/LocalStorageService";
+import {clearToken, setToken} from "@/services/LocalStorageService";
 
 export const state = () => ({
-    token: getToken()
+    token: ''
 })
 
 export const mutations = {
@@ -9,10 +9,19 @@ export const mutations = {
         state.token = token
         setToken(token)
     },
-    clearToken(state){
+    clearToken(state) {
         state.token = null
         clearToken()
+    },
+    initToken(state) {
+        state.token = localStorage.getItem('token')
     }
 }
 
-export const getters = {}
+export const actions = {}
+
+export const getters = {
+    isLoggedIn(state) {
+        return state.token !== null && state.token !== ''
+    }
+}
