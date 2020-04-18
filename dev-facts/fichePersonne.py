@@ -1,8 +1,4 @@
-"""
-Created on 2020-01-10 Last Update 2020-02-05
-@author : Jacques Gérard - UNamur (www.unamur.be)
-@author : Fabrice Orbant - UNamur (www.unamur.be)
-"""
+
 if __name__ == '__main__': from SHIDev.session import loginRequired
 from SHI.web import webPage, readForm
 from yattag import Doc
