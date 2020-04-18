@@ -1,10 +1,4 @@
-#! /usr/bin/python
-# -*- coding: utf-8 -*-
-"""
-Created on 2020-01-10 Last Update 2020-01-13
-@author : Jacques Gérard - UNamur (www.unamur.be)
-@author : Fabrice Orbant - UNamur (www.unamur.be)
-"""
+
 if __name__ == '__main__': from SHI.session import Session
 from SHI.local_ldap import check_eID, readLDAP
 from SHI.web import webPage, goTo, readForm
