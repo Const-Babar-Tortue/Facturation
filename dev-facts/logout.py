@@ -1,5 +1,3 @@
- Fabrice Orbant - UNamur (www.unamur.be)
-"""
 import os
 from SHI.session import loginRequired, session
 from SHI.web import webPage, goTo, readForm
