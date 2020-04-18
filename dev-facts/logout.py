@@ -1,9 +1,4 @@
-#! /usr/bin/python
-# -*- coding: utf-8 -*-
-"""
-Created on 2020-01-10 Last Update 2020-02-04
-@author : Jacques Gérard - UNamur (www.unamur.be)
-@author : Fabrice Orbant - UNamur (www.unamur.be)
+ Fabrice Orbant - UNamur (www.unamur.be)
 """
 import os
 from SHI.session import loginRequired, session
