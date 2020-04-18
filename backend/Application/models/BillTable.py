@@ -11,9 +11,6 @@ class Bill(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey(User.id))
     client_id = db.Column(db.Integer, db.ForeignKey(Client.id))
 
-    # user = db.relationship('User', foreign_keys='Bills.user_id')
-    # client = db.relationship('Client', foreign_keys='Bills.client_id')
-
     number = db.Column(db.Integer, nullable=False)
     date = db.Column(db.Date, nullable=False)
     expiration = db.Column(db.Date, nullable=False)

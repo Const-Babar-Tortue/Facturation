@@ -1,0 +1,27 @@
+# Group Clients
+
+## Clients [/clients]
+
+### Create a client [POST]
+
++ Request (application/json)
+    + Headers
+        Authorization: JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
+        
+    + Attributes (object)
+        + name: babar (string)
+        + street: rue de babar (string)
+        + streetNumber: 42A (string)
+        + postCode: 1234 (number)
+        + city: Bruxelles (string)
+        + city: Bruxelles (string)
+        + firm: true (boolean)
+        + vatNumber: i&uéh98979 (string)
+      
++ Response 200 (application/json)
+    + Attributes (object)
+        + message: Created (string)
+
++ Response 409 (application/json)
+    + Attributes (object)
+        + message: Client already exists (string)
