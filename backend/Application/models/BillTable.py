@@ -7,8 +7,7 @@ class Bill(db.Model):
     __tablename__ = "Bills"
 
     id = db.Column(db.Integer, primary_key=True)
-
-    user_id = db.Column(db.Integer, db.ForeignKey(User.id))
+    
     client_id = db.Column(db.Integer, db.ForeignKey(Client.id))
 
     number = db.Column(db.Integer, nullable=False)
