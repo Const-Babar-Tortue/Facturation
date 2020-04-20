@@ -4,14 +4,17 @@ import {mapState} from "vuex";
 
 const state = mapState(['token'])
 
+let apiHost = process.env.API_HOST
+
 const apiClient = axios.create({
-    baseURL: `http://localhost:5000`,
+    baseURL: apiHost,
     withCredentials: false,
     headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
     }
 })
+
 
 axios.interceptors.request.use(
     config => {

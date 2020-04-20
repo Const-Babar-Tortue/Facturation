@@ -17,5 +17,7 @@
     "nuxt": "^2.0.0",
     "vee-validate": "^3.2.5"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "@nuxtjs/dotenv": "^1.4.1"
+  }
 }
