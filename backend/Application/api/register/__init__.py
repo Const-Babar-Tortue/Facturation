@@ -34,7 +34,8 @@ class Register(Resource):
         user = User(
             username=username,
             email=email,
-            created_on=datetime.now()
+            created_on=datetime.now(),
+            admin=false
         )
         user.set_password(password)
 
