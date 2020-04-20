@@ -1,3 +1,5 @@
+const env = require('dotenv').config().parsed
+
 export default {
     mode: 'universal',
     /*
@@ -31,7 +33,7 @@ export default {
     /*
     ** Nuxt.js dev-modules
     */
-    buildModules: [],
+    buildModules: ['@nuxtjs/dotenv'],
     /*
     ** Nuxt.js modules
     */
@@ -54,5 +56,9 @@ export default {
         */
         extend(config, ctx) {
         }
-    }
+    },
+
+    env: {
+        API_HOST: env.API_HOST
+    },
 }
