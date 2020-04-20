@@ -7,8 +7,6 @@ class Client(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
 
-    user_id = db.Column(db.Integer, db.ForeignKey(User.id))
-
     name = db.Column(db.String(100), nullable=False)
     street = db.Column(db.String(256), nullable=False)
     street_number = db.Column(db.String(6), nullable=False)
