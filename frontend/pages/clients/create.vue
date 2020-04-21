@@ -137,7 +137,7 @@
             },
             createClient() {
                 ClientService.createClient({
-                    username: this.name,
+                    name: this.name,
                     street: this.street,
                     streetNumber: this.number,
                     postalCode: this.postal,
