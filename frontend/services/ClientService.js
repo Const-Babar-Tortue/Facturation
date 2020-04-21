@@ -8,6 +8,15 @@ export default {
             return Promise.reject({error: true})
         }
     },
+
+    async clients() {
+        try {
+            const {data} = await apiClient.get('/clients')
+            return data
+        } catch (e) {
+            return Promise.reject({error: true})
+        }
+    },
     // pass explicit arguments
     async createClient({name, street, streetNumber, postalCode, city, firm, vatNumber}) {
         try {
