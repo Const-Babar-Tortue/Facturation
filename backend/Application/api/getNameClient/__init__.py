@@ -16,10 +16,10 @@ class GetNameClient(Resource):
 		parse_name_client=list()
 
 		for resp in names_client:
-			parse_name_client.append(_build_item(resp))
+			parse_name_client.append(build_item(resp))
 
 		return jsonify(parse_name_client)
 
-	def _build_item(client):
+def build_item(client):
 		name = client.name
-		return name
+		return name	
