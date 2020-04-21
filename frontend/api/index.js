@@ -19,8 +19,10 @@ const apiClient = axios.create({
 axios.interceptors.request.use(
     config => {
         const token = state.token;
+        console.log("token :" + state.token)
         if (token) {
-            config.headers['Authorization'] = 'Bearer ' + token;
+            config.headers['Authorization'] = 'JWT ' + token;
+            console.log(token)
         }
         return config;
     },
