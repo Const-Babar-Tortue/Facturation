@@ -69,7 +69,7 @@
     import {confirmed, email, required} from 'vee-validate/dist/rules';
     import Centered from '@/components/Centered'
     import BTextInputWithValidation from '@/components/BTextInputWithValidation'
-    import RegisterService from '@/services/RegisterService.js'
+    import ClientService from "@/services/ClientService";
 
     extend('email', {
         ...email,
@@ -109,11 +109,15 @@
             client: null,
             exists: false,
             error: false,
-            clients: [
-                {value: 0, text: 'Van Dormael'},
-                {value: 1, text: 'Delvigne'}
-            ]
+            clients: []
         }),
+        mounted() {
+            ClientService.clientNames()
+                .then(names => this.clients = names)
+                .catch(e => {
+                    console.log(e)
+                })
+        },
         methods: {
             onSubmit() {
                 this.exists = false
@@ -121,17 +125,6 @@
                 this.register()
             },
             register() {
-                return
-                RegisterService.register({
-                    username: this.username,
-                    email: this.email,
-                    password: this.password
-                }).then(_ =>
-                    this.$router.push('/')
-                ).catch(e => {
-                    if (e.exists) this.exists = true
-                    else this.error = true
-                })
             },
 
         }

@@ -41,7 +41,7 @@
 
                     <BTextInputWithValidation
                         rules="required"
-                        type="text"
+                        type="number"
                         label="Postal code:"
                         name="Postal"
                         v-model="postal"
@@ -57,14 +57,14 @@
                         placeholder="Enter a city"
                     />
 
-                    <BTextInputWithValidation
-                        rules="required"
-                        type="text"
-                        label="Firm:"
-                        name="Firm"
+                    <b-form-checkbox
+                        id="firm"
                         v-model="firm"
-                        placeholder="Enter a firm"
-                    />
+                        name="firm"
+                        value="true"
+                    >
+                        firm
+                    </b-form-checkbox>
 
                     <BTextInputWithValidation
                         rules="required"
@@ -80,15 +80,6 @@
             </ValidationObserver>
         </b-card>
 
-        <div>
-            {{ name }}<br/>
-            {{ street}}<br/>
-            {{ number}}<br/>
-            {{ postal}}<br/>
-            {{ city }}<br/>
-            {{ firm }}<br/>
-            {{ vat }}<br/>
-        </div>
     </Centered>
 </template>
 
@@ -97,7 +88,7 @@
     import {confirmed, email, required} from 'vee-validate/dist/rules';
     import Centered from '@/components/Centered'
     import BTextInputWithValidation from '@/components/BTextInputWithValidation'
-    import RegisterService from '@/services/RegisterService.js'
+    import ClientService from '@/services/ClientService.js'
 
     extend('email', {
         ...email,
@@ -142,14 +133,17 @@
             onSubmit() {
                 this.exists = false
                 this.error = false
-                this.register()
+                this.createClient()
             },
-            register() {
-                return
-                RegisterService.register({
-                    username: this.username,
-                    email: this.email,
-                    password: this.password
+            createClient() {
+                ClientService.createClient({
+                    username: this.name,
+                    street: this.street,
+                    streetNumber: this.number,
+                    postalCode: this.postal,
+                    city: this.city,
+                    firm: !!this.firm,
+                    vatNumber: this.vat
                 }).then(_ =>
                     this.$router.push('/')
                 ).catch(e => {
