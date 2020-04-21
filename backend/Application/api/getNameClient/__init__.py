@@ -6,7 +6,7 @@ from Application import db
 from Application.models.ClientTable import Client
 
 
-class GetNameClient(Ressource):
+class GetNameClient(Resource):
 	method_decorators = [jwt_required()]
 
 	def get(self):
@@ -14,8 +14,8 @@ class GetNameClient(Ressource):
 		names_client=Client.query.with_entities(Client.name)
 
 		parse_name_client=list()
-		
-		for(resp in names_client):
+
+		for resp in names_client:
 			parse_name_client.append(_build_item(resp))
 
 		return jsonify(parse_name_client)
