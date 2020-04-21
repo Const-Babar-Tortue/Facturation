@@ -24,7 +24,7 @@ class Clients(Resource):
         name = args['name']
 
         exists = Client.query.filter(
-            (Client.user_id == current_identity.id) & (Client.name == name)
+            (Client.name == name)
         ).first()
 
         if exists:
@@ -41,7 +41,6 @@ class Clients(Resource):
 
         client = Client(
             name=name,
-            user_id=current_identity.id,
             street=street,
             street_number=street_number,
             postal_code=postal_code,
