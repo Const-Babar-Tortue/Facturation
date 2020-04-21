@@ -9,6 +9,7 @@ db = SQLAlchemy()
 # API
 from .api.register import Register
 from .api.clients import Clients
+from .api.getNameClient import getNameClient
 from .api.bills import bill_route
 
 app = Flask(__name__, instance_relative_config=False)
@@ -29,5 +30,6 @@ def init_app():
 
     api.add_resource(Register, '/register')
     api.add_resource(Clients, '/clients')
+    api.add_resource(getNameClient, '/clients/names')
 
     return app
