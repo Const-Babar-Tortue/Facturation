@@ -16,7 +16,7 @@ parser.add_argument('vatNumber', type=str, required=True)
 
 
 class Clients(Resource):
-    method_decorators = [jwt_required()]
+    # method_decorators = [jwt_required()]
 
     def post(self):
         args = parser.parse_args()
