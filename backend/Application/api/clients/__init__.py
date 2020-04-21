@@ -18,6 +18,17 @@ parser.add_argument('vatNumber', type=str, required=True)
 class Clients(Resource):
     # method_decorators = [jwt_required()]
 
+    def get(self):
+        clients=Client.query.all()
+
+        parse_client=[]
+
+        for resp in clients:
+            parse_client.append(build_item(resp))
+
+        return jsonify(parse_client) 
+
+
     def post(self):
         args = parser.parse_args()
 
@@ -56,3 +67,15 @@ class Clients(Resource):
         response.status_code = 201
 
         return response
+
+def build_item(client):
+    client = {
+        "name" : client.name,
+        "street" : client.street,
+        "streetNumber" : client.street_number,
+        "postalCode" : client.postal_code,
+        "city" : client.city,
+        "firm" : client.firm,
+        "vatNumber" : client.vat_number
+    }
+    return client
