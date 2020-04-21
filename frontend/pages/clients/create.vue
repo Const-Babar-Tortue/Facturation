@@ -126,7 +126,7 @@
             city: null,
             firm: null,
             vat: null,
-            exists:false,
+            exists: false,
             error: false
         }),
         methods: {
