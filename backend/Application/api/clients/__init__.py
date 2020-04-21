@@ -72,10 +72,10 @@ def build_item(client):
     client = {
         "name" : client.name,
         "street" : client.street,
-        "street_number" : client.street_number,
-        "postal_code" : client.postal_code,
+        "streetNumber" : client.street_number,
+        "postalCode" : client.postal_code,
         "city" : client.city,
         "firm" : client.firm,
-        "vat_number" : client.vat_number
+        "vatNumber" : client.vat_number
     }
     return client
