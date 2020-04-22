@@ -75,7 +75,7 @@ class Clients(Resource):
         ).first()
 
         if existing_client is None:
-            reponse = jsonify({"message": "Client does not exists"})
+            response = jsonify({"message": "Client does not exists"})
             response.status_code = 404
             return response
 
