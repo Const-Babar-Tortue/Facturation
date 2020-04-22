@@ -14,6 +14,9 @@ parser.add_argument('city', type=str, required=True)
 parser.add_argument('firm', type=bool, required=True)
 parser.add_argument('vatNumber', type=str, required=True)
 
+parser_name = reqparse.RequestParser()
+parser.add_argument('name', type=str, required=True)
+
 class Clients(Resource):
     # method_decorators = [jwt_required()]
 
@@ -68,8 +71,8 @@ class Clients(Resource):
         return response
 
     def delete(self):
-        args = parser.parse_args()
-        
+        args = parser_name.parse_args()
+
         name = args['name']
 
         existing_client = Client.query.filter(
