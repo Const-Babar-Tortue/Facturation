@@ -10,7 +10,7 @@ db = SQLAlchemy()
 from .api.register import Register
 from .api.clients import Clients
 from .api.getNameClient import GetNameClient
-from .api.deleteClient import DeleteClient
+from .api.deleteClient.deleteClient import DeleteClient
 
 app = Flask(__name__, instance_relative_config=False)
 api = Api(app)

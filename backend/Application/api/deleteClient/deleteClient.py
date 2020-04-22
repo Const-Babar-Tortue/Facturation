@@ -18,7 +18,7 @@ class DeleteClient(Resource):
 			Client.name == name
 		).first()
 
-		if !existing_client:
+		if existing_client is None:
 			reponse = jsonify({"message": "Client does not exists"})
 			response.status_code = 404
 			return response
