@@ -5,17 +5,17 @@ from flask_restful import Resource, reqparse
 from Application import db
 from Application.models.ClientTable import Client
 
-parser = reqparse.RequestParser()
-parser.add_argument('name', type=str, required=True)
-parser.add_argument('street', type=str, required=True)
-parser.add_argument('streetNumber', type=str, required=True)
-parser.add_argument('postalCode', type=int, required=True)
-parser.add_argument('city', type=str, required=True)
-parser.add_argument('firm', type=bool, required=True)
-parser.add_argument('vatNumber', type=str, required=True)
+create_parser = reqparse.RequestParser()
+create_parser.add_argument('name', type=str, required=True)
+create_parser.add_argument('street', type=str, required=True)
+create_parser.add_argument('streetNumber', type=str, required=True)
+create_parser.add_argument('postalCode', type=int, required=True)
+create_parser.add_argument('city', type=str, required=True)
+create_parser.add_argument('firm', type=bool, required=True)
+create_parser.add_argument('vatNumber', type=str, required=True)
 
-parser_name = reqparse.RequestParser()
-parser.add_argument('name', type=str, required=True)
+delete_parser = reqparse.RequestParser()
+delete_parser.add_argument('name', type=str, required=True)
 
 class Clients(Resource):
     # method_decorators = [jwt_required()]
@@ -32,7 +32,7 @@ class Clients(Resource):
 
 
     def post(self):
-        args = parser.parse_args()
+        args = create_parser.parse_args()
 
         name = args['name']
 
@@ -71,7 +71,7 @@ class Clients(Resource):
         return response
 
     def delete(self):
-        args = parser_name.parse_args()
+        args = delete_parser.parse_args()
 
         name = args['name']
 
