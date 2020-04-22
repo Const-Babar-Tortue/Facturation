@@ -90,7 +90,7 @@ class Clients(Resource):
         db.session.commit()
 
         response = jsonify({'message': 'Deleted'})
-        response.status_code = 201
+        response.status_code = 200
 
         return response
 
