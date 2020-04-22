@@ -89,6 +89,11 @@ class Clients(Resource):
         ).delete()
         db.session.commit()
 
+        response = jsonify({'message': 'Deleted'})
+        response.status_code = 201
+
+        return response
+
 def build_item(client):
     client = {
         "name" : client.name,
