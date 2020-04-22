@@ -67,7 +67,7 @@ class Clients(Resource):
 
         return response
 
-        def delete(self):
+    def delete(self):
         name = args['name']
 
         existing_client = Client.query.filter(
