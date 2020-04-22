@@ -10,6 +10,7 @@ db = SQLAlchemy()
 from .api.register import Register
 from .api.clients import Clients
 from .api.getNameClient import GetNameClient
+from .api.deleteClient import DeleteClient
 
 app = Flask(__name__, instance_relative_config=False)
 api = Api(app)
@@ -30,5 +31,6 @@ def init_app():
     api.add_resource(Register, '/register')
     api.add_resource(Clients, '/clients')
     api.add_resource(GetNameClient, '/clients/names')
+    api.add_resource(DeleteClient, '/clients/delete')
 
     return app
