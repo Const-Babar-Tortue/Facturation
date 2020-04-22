@@ -68,6 +68,8 @@ class Clients(Resource):
         return response
 
     def delete(self):
+        args = parser.parse_args()
+        
         name = args['name']
 
         existing_client = Client.query.filter(
