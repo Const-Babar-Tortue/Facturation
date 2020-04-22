@@ -14,7 +14,6 @@ parser.add_argument('city', type=str, required=True)
 parser.add_argument('firm', type=bool, required=True)
 parser.add_argument('vatNumber', type=str, required=True)
 
-
 class Clients(Resource):
     # method_decorators = [jwt_required()]
 
@@ -67,6 +66,23 @@ class Clients(Resource):
         response.status_code = 201
 
         return response
+
+        def delete(self):
+        name = args['name']
+
+        existing_client = Client.query.filter(
+            Client.name == name
+        ).first()
+
+        if existing_client is None:
+            reponse = jsonify({"message": "Client does not exists"})
+            response.status_code = 404
+            return response
+
+        Client.query.filter(
+            Client.name == name
+        ).delete()
+        db.session.commit()
 
 def build_item(client):
     client = {
