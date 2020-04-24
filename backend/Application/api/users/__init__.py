@@ -8,7 +8,7 @@ from Application.models.UserTable import User
 from flask_jwt import jwt_required
 
 class Users(Resource):
-	method_decorators = [jwt_required()]
+	method_decorators=[jwt_required()]
 
 	def get(self):
 		user = {
@@ -16,6 +16,6 @@ class Users(Resource):
 			'email' : current_identity.email
 		}
 
-		user_list = [user]
+		user_list=[user]
 
 		return jsonify(user_list)
