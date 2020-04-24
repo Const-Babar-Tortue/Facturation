@@ -69,7 +69,6 @@
     import {confirmed, email, required} from 'vee-validate/dist/rules';
     import Centered from '@/components/Centered'
     import BTextInputWithValidation from '@/components/BTextInputWithValidation'
-    import ClientService from "@/services/ClientService";
 
     extend('email', {
         ...email,
@@ -112,11 +111,8 @@
             clients: []
         }),
         mounted() {
-            ClientService.clientNames()
-                .then(names => this.clients = names)
-                .catch(e => {
-                    console.log(e)
-                })
+            this.$axios.get('/clients/names')
+                .then(({data}) => this.clients = data)
         },
         methods: {
             onSubmit() {

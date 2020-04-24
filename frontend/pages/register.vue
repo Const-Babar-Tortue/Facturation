@@ -12,7 +12,6 @@
                         An error occurred while registering
                     </b-alert>
 
-
                     <BTextInputWithValidation
                         rules="required|min:5"
                         type="text"
@@ -64,7 +63,6 @@
     import {confirmed, email, required} from 'vee-validate/dist/rules';
     import Centered from '@/components/Centered'
     import BTextInputWithValidation from '@/components/BTextInputWithValidation'
-    import RegisterService from '@/services/RegisterService.js'
 
     extend('email', {
         ...email,
@@ -94,6 +92,9 @@
             ValidationObserver,
             BTextInputWithValidation
         },
+        options: {
+            auth: false,
+        },
         data: () => ({
             username: null,
             email: null,
@@ -109,16 +110,15 @@
                 this.register()
             },
             register() {
-                RegisterService.register({
+                this.$axios.post('/register', {
                     username: this.username,
                     email: this.email,
                     password: this.password
-                }).then(_ =>
-                    this.$router.push('/')
-                ).catch(e => {
-                    if (e.exists) this.exists = true
-                    else this.error = true
-                })
+                }).then(_ => this.$router.push('/'))
+                    .catch(e => {
+                        if (e.response && e.response.status === 409) this.exists = true
+                        else this.error = true
+                    })
             },
 
         }

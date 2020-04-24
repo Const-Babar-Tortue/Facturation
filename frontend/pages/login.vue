@@ -44,11 +44,8 @@
     import {extend, ValidationObserver} from "vee-validate";
     import {required} from 'vee-validate/dist/rules';
 
-    import {mapMutations} from 'vuex'
-
     import Centered from '@/components/Centered'
     import BTextInputWithValidation from '@/components/BTextInputWithValidation'
-    import LoginService from '@/services/LoginService.js'
 
     extend('required', {
         ...required,
@@ -62,6 +59,9 @@
             ValidationObserver,
             BTextInputWithValidation
         },
+        options: {
+            auth: 'guest',
+        },
         data: () => ({
             username: null,
             password: null,
@@ -69,17 +69,18 @@
             error: false
         }),
         methods: {
-            ...mapMutations(['setToken']),
             onSubmit() {
-                LoginService.login({
-                    username: this.username,
-                    password: this.password
-                }).then(({token}) => {
-                        this.setToken(token)
-                        return this.$router.push('/');
+                this.$auth.loginWith('local', {
+                    data: {
+                        username: this.username,
+                        password: this.password
+                    }
+                }).then(() => {
+                        this.$auth.setUser({"username": this.username}) //FIXME
+                        this.$router.push('/');
                     }
                 ).catch(e => {
-                    if (e.invalid) this.invalid = true
+                    if ((e.response && e.response.status === 401)) this.invalid = true
                     else this.error = true
                 })
             },

@@ -7,16 +7,14 @@
 </template>
 
 <script>
-    import ClientService from "../../services/ClientService";
-
     export default {
         name: "clients",
         data: () => ({
             clients: []
         }),
         mounted() {
-            ClientService.clients()
-                .then(clients => this.clients = clients)
+            this.$axios.get('/clients')
+                .then(({data}) => this.clients = data)
         }
     }
 </script>
