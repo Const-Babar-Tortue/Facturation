@@ -64,7 +64,6 @@
     import {confirmed, email, required} from 'vee-validate/dist/rules';
     import Centered from '@/components/Centered'
     import BTextInputWithValidation from '@/components/BTextInputWithValidation'
-    import RegisterService from '@/services/RegisterService.js'
 
     extend('email', {
         ...email,
@@ -109,7 +108,7 @@
                 this.register()
             },
             register() {
-                RegisterService.register({
+                /*RegisterService.register({
                     username: this.username,
                     email: this.email,
                     password: this.password
@@ -118,7 +117,7 @@
                 ).catch(e => {
                     if (e.exists) this.exists = true
                     else this.error = true
-                })
+                })*/
             },
 
         }

@@ -29,7 +29,7 @@ export default {
     /*
     ** Plugins to load before mounting the App
     */
-    plugins: ['~/plugins/nuxt-client-init.client.js'],
+    plugins: ["~/plugins/axios.js"],
     /*
     ** Nuxt.js dev-modules
     */
@@ -40,7 +40,8 @@ export default {
     modules: [
         // Doc: https://bootstrap-vue.js.org
         'bootstrap-vue/nuxt',
-        '@nuxtjs/axios'
+        '@nuxtjs/axios',
+        '@nuxtjs/auth',
     ],
     /*
     ** Build configuration
@@ -60,5 +61,32 @@ export default {
 
     env: {
         API_HOST: env.API_HOST
+    },
+
+    auth: {
+        redirect: {
+            login: '/account',
+            logout: '/',
+            home: '/',
+        },
+        watchLoggedIn: true,
+        // cookie: true,
+        strategies: {
+            local: {
+                endpoints: {
+                    login: {
+                        url: '/auth',
+                        method: 'post',
+                        propertyName: 'token',
+                    },
+                    user: {
+                        url: '/user/me',
+                        method: 'get',
+                        propertyName: 'user',
+                    },
+                },
+                autoFetchUser: false, //FIXME
+            },
+        },
     },
 }

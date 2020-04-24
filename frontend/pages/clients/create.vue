@@ -88,7 +88,6 @@
     import {confirmed, email, required} from 'vee-validate/dist/rules';
     import Centered from '@/components/Centered'
     import BTextInputWithValidation from '@/components/BTextInputWithValidation'
-    import ClientService from '@/services/ClientService.js'
 
     extend('email', {
         ...email,
@@ -136,7 +135,7 @@
                 this.createClient()
             },
             createClient() {
-                ClientService.createClient({
+               /* ClientService.createClient({
                     name: this.name,
                     street: this.street,
                     streetNumber: this.number,
@@ -149,7 +148,7 @@
                 ).catch(e => {
                     if (e.exists) this.exists = true
                     else this.error = true
-                })
+                }) */
             },
 
         }
