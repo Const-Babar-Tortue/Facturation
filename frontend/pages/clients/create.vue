@@ -137,7 +137,7 @@
             },
             createClient() {
                 ClientService.createClient({
-                    username: this.name,
+                    name: this.name,
                     street: this.street,
                     streetNumber: this.number,
                     postalCode: this.postal,
@@ -145,7 +145,7 @@
                     firm: !!this.firm,
                     vatNumber: this.vat
                 }).then(_ =>
-                    this.$router.push('/')
+                    this.$router.push('/clients')
                 ).catch(e => {
                     if (e.exists) this.exists = true
                     else this.error = true

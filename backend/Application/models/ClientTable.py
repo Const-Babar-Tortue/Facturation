@@ -1,5 +1,4 @@
 from Application import db
-from .UserTable import User
 
 
 class Client(db.Model):
