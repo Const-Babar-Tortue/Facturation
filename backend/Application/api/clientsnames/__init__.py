@@ -5,7 +5,7 @@ from flask_restful import Resource
 from Application.models.ClientTable import Client
 
 
-class GetNameClient(Resource):
+class ClientsNames(Resource):
     method_decorators = [jwt_required()]
 
     def get(self):

@@ -9,7 +9,7 @@ db = SQLAlchemy()
 # API
 from .api.register import Register
 from .api.clients import Clients
-from .api.getNameClient import GetNameClient
+from .api.clientsnames import ClientsNames
 from .api.users import Users
 
 app = Flask(__name__, instance_relative_config=False)
@@ -30,7 +30,7 @@ def init_app():
 
     api.add_resource(Register, '/register')
     api.add_resource(Clients, '/clients')
-    api.add_resource(GetNameClient, '/clients/names')
+    api.add_resource(ClientsNames, '/clients/names')
     api.add_resource(Users, '/user/me')
 
     return app

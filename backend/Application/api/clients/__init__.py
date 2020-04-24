@@ -1,4 +1,5 @@
 from flask import jsonify
+from flask_jwt import jwt_required
 from flask_restful import Resource, reqparse
 
 from Application import db
@@ -16,8 +17,9 @@ create_parser.add_argument('vatNumber', type=str, required=True)
 delete_parser = reqparse.RequestParser()
 delete_parser.add_argument('name', type=str, required=True)
 
+
 class Clients(Resource):
-    # method_decorators = [jwt_required()]
+    method_decorators = [jwt_required()]
 
     def get(self):
         clients = Client.query.all()
@@ -91,6 +93,7 @@ class Clients(Resource):
         response.status_code = 200
 
         return response
+
 
 def build_item(client):
     client = {
