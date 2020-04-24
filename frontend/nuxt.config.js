@@ -72,9 +72,10 @@ export default {
             login: '/login',
             logout: '/',
             home: '/',
+            callback: false
         },
         watchLoggedIn: true,
-        // cookie: true,
+        cookie: true,
         strategies: {
             local: {
                 endpoints: {

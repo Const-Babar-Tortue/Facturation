@@ -22,4 +22,4 @@ class Users(Resource):
             'email': current_identity.email
         }
 
-        return jsonify(user)
+        return jsonify({'user': user})
