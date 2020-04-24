@@ -111,11 +111,8 @@
             clients: []
         }),
         mounted() {
-            /*ClientService.clientNames()
-                .then(names => this.clients = names)
-                .catch(e => {
-                    console.log(e)
-                })*/
+            this.$axios.get('/clients/names')
+                .then(({data}) => this.clients = data)
         },
         methods: {
             onSubmit() {

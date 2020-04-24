@@ -135,7 +135,7 @@
                 this.createClient()
             },
             createClient() {
-               /* ClientService.createClient({
+                this.$axios.post('/clients', {
                     name: this.name,
                     street: this.street,
                     streetNumber: this.number,
@@ -143,12 +143,11 @@
                     city: this.city,
                     firm: !!this.firm,
                     vatNumber: this.vat
-                }).then(_ =>
-                    this.$router.push('/clients')
-                ).catch(e => {
-                    if (e.exists) this.exists = true
+                }).then( _ => this.$router.push('/clients'))
+                .catch(e => {
+                    if (e.response && e.response.status === 409) this.exists = true
                     else this.error = true
-                }) */
+                })
             },
 
         }

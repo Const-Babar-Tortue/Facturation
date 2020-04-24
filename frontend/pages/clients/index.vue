@@ -13,8 +13,8 @@
             clients: []
         }),
         mounted() {
-            /*ClientService.clients()
-                .then(clients => this.clients = clients)*/
+            this.$axios.get('/clients')
+                .then(({data}) => this.clients = data)
         }
     }
 </script>

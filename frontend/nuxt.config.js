@@ -81,7 +81,7 @@ export default {
                     login: {
                         url: '/auth',
                         method: 'post',
-                        propertyName: 'token',
+                        propertyName: 'access_token',
                     },
                     user: {
                         url: '/user/me',
