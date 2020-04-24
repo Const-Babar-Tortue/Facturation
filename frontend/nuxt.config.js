@@ -63,9 +63,13 @@ export default {
         API_HOST: env.API_HOST
     },
 
+    router: {
+        middleware: ['auth'],
+    },
+
     auth: {
         redirect: {
-            login: '/account',
+            login: '/login',
             logout: '/',
             home: '/',
         },

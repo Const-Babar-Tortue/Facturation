@@ -59,6 +59,9 @@
             ValidationObserver,
             BTextInputWithValidation
         },
+        options: {
+            auth: 'guest',
+        },
         data: () => ({
             username: null,
             password: null,

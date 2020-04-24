@@ -93,6 +93,9 @@
             ValidationObserver,
             BTextInputWithValidation
         },
+        options: {
+            auth: false,
+        },
         data: () => ({
             username: null,
             email: null,
