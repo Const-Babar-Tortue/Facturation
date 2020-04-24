@@ -16,8 +16,8 @@ class Users(Resource):
 
 		if existing_user is None :
 			response=jsonify({"message": "User doesn't exists anymore"})
-            response.status_code=410
-            return response
+			response.status_code=410
+			return response
 
 		user = {
 			'username' : current_identity.username,
