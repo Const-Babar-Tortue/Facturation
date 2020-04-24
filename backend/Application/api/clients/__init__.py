@@ -1,5 +1,4 @@
 from flask import jsonify
-from flask_jwt import current_identity, jwt_required
 from flask_restful import Resource, reqparse
 
 from Application import db
@@ -19,15 +18,14 @@ class Clients(Resource):
     # method_decorators = [jwt_required()]
 
     def get(self):
-        clients=Client.query.all()
+        clients = Client.query.all()
 
-        parse_client=[]
+        parse_client = []
 
         for resp in clients:
             parse_client.append(build_item(resp))
 
-        return jsonify(parse_client) 
-
+        return jsonify(parse_client)
 
     def post(self):
         args = parser.parse_args()
@@ -68,14 +66,15 @@ class Clients(Resource):
 
         return response
 
+
 def build_item(client):
     client = {
-        "name" : client.name,
-        "street" : client.street,
-        "streetNumber" : client.street_number,
-        "postalCode" : client.postal_code,
-        "city" : client.city,
-        "firm" : client.firm,
-        "vatNumber" : client.vat_number
+        "name": client.name,
+        "street": client.street,
+        "streetNumber": client.street_number,
+        "postalCode": client.postal_code,
+        "city": client.city,
+        "firm": client.firm,
+        "vatNumber": client.vat_number
     }
     return client

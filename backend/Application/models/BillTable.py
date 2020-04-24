@@ -1,13 +1,12 @@
 from Application import db
 from .ClientTable import Client
-from .UserTable import User
 
 
 class Bill(db.Model):
     __tablename__ = "Bills"
 
     id = db.Column(db.Integer, primary_key=True)
-    
+
     client_id = db.Column(db.Integer, db.ForeignKey(Client.id))
 
     number = db.Column(db.Integer, nullable=False)

@@ -2,6 +2,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 
 from Application import db
 
+
 class User(db.Model):
     __tablename__ = "Users"
 
