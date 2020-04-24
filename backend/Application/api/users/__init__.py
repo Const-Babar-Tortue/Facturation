@@ -11,11 +11,17 @@ class Users(Resource):
 	method_decorators=[jwt_required()]
 
 	def get(self):
+
+		existing_user=User.query.filter( User.id==current_identity.id ).first()
+
+		if existing_user is None :
+			response=jsonify({"message": "User doesn't exists anymore"})
+            response.status_code=410
+            return response
+
 		user = {
 			'username' : current_identity.username,
 			'email' : current_identity.email
 		}
 
-		user_list=[user]
-
-		return jsonify(user_list)
+		return jsonify(user)
