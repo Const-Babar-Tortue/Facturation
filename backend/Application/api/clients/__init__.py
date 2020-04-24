@@ -4,15 +4,17 @@ from flask_restful import Resource, reqparse
 from Application import db
 from Application.models.ClientTable import Client
 
-parser = reqparse.RequestParser()
-parser.add_argument('name', type=str, required=True)
-parser.add_argument('street', type=str, required=True)
-parser.add_argument('streetNumber', type=str, required=True)
-parser.add_argument('postalCode', type=int, required=True)
-parser.add_argument('city', type=str, required=True)
-parser.add_argument('firm', type=bool, required=True)
-parser.add_argument('vatNumber', type=str, required=True)
+create_parser = reqparse.RequestParser()
+create_parser.add_argument('name', type=str, required=True)
+create_parser.add_argument('street', type=str, required=True)
+create_parser.add_argument('streetNumber', type=str, required=True)
+create_parser.add_argument('postalCode', type=int, required=True)
+create_parser.add_argument('city', type=str, required=True)
+create_parser.add_argument('firm', type=bool, required=True)
+create_parser.add_argument('vatNumber', type=str, required=True)
 
+delete_parser = reqparse.RequestParser()
+delete_parser.add_argument('name', type=str, required=True)
 
 class Clients(Resource):
     # method_decorators = [jwt_required()]
@@ -28,7 +30,7 @@ class Clients(Resource):
         return jsonify(parse_client)
 
     def post(self):
-        args = parser.parse_args()
+        args = create_parser.parse_args()
 
         name = args['name']
 
@@ -66,6 +68,29 @@ class Clients(Resource):
 
         return response
 
+    def delete(self):
+        args = delete_parser.parse_args()
+
+        name = args['name']
+
+        existing_client = Client.query.filter(
+            Client.name == name
+        ).first()
+
+        if existing_client is None:
+            response = jsonify({"message": "Client does not exists"})
+            response.status_code = 404
+            return response
+
+        Client.query.filter(
+            Client.name == name
+        ).delete()
+        db.session.commit()
+
+        response = jsonify({'message': 'Deleted'})
+        response.status_code = 200
+
+        return response
 
 def build_item(client):
     client = {
