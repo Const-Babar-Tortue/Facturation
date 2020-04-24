@@ -89,7 +89,7 @@ export default {
                         propertyName: 'user',
                     },
                 },
-                autoFetchUser: false, //FIXME
+                autoFetchUser: true,
             },
         },
     },

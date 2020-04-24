@@ -76,7 +76,6 @@
                         password: this.password
                     }
                 }).then(() => {
-                        this.$auth.setUser({"username": this.username}) //FIXME
                         this.$router.push('/');
                     }
                 ).catch(e => {
