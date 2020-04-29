@@ -15,3 +15,11 @@ class Bills(Resource):
         response = jsonify({"message": "Created"})
         response.status_code = 201
         return response
+
+
+def calculate_vat(amount):
+    return amount * .21
+
+
+def total_with_vat(amount):
+    return amount + calculate_vat(amount)

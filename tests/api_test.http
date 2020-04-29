@@ -1,0 +1,100 @@
+# Register a new user
+POST {{api}}/register
+Content-Type: application/json
+
+{
+  "username": "{{username}}",
+  "email": "{{email}}",
+  "password": "{{password}}"
+}
+
+> {%
+client.test("Request executed successfully", function() {
+   client.assert(response.status === 201 || response.status === 409, "Response status is not 201|409");
+});
+%}
+
+### Get a JWT token
+POST {{api}}/auth
+Content-Type: application/json
+
+{
+  "username": "{{username}}",
+  "password": "{{password}}"
+}
+
+> {%
+client.global.set("token", response.body.access_token);
+client.test("Request executed successfully", function() {
+   client.assert(response.status === 200, "Response status is not 200");
+   client.assert(response.body.access_token != null, "Token is not present");
+});
+%}
+
+### Create a client
+POST {{api}}/clients
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "name": "test",
+  "street": "test",
+  "streetNumber": "21A",
+  "postalCode": 1234,
+  "city": "Louvain-la-Neuve",
+  "firm": false,
+  "vatNumber": "BE0999999946"
+}
+
+> {%
+client.test("Request executed successfully", function() {
+   client.assert(response.status === 201, "Response status is not 201");
+});
+%}
+
+### Get clients without token
+GET {{api}}/clients
+
+> {%
+client.test("Request executed successfully", function() {
+   client.assert(response.status === 401, "Response status is not 401");
+});
+%}
+
+### Get clients with invalid token
+GET {{api}}/clients
+Authorization: Bearer {{$randomInt}}
+
+> {%
+client.test("Request executed successfully", function() {
+   client.assert(response.status === 401, "Response status is not 401");
+});
+%}
+
+### Get clients
+GET {{api}}/clients
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+> {%
+client.test("Request executed successfully", function() {
+   client.assert(response.status === 200, "Response status is not 200");
+   client.assert(response.body.length !== undefined && response.body.length !== null, "Response is not an array");
+   client.assert(response.body.length > 1, "Clients are empty");
+});
+%}
+
+### Delete client
+DELETE {{api}}/clients
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "name": "test"
+}
+
+> {%
+client.test("Request executed successfully", function() {
+   client.assert(response.status === 200, "Response status is not 200");
+});
+%}
