@@ -52,6 +52,25 @@ client.test("Request executed successfully", function() {
 });
 %}
 
+### Get clients without token
+GET {{api}}/clients
+
+> {%
+client.test("Request executed successfully", function() {
+   client.assert(response.status === 401, "Response status is not 401");
+});
+%}
+
+### Get clients with invalid token
+GET {{api}}/clients
+Authorization: Bearer {{$randomInt}}
+
+> {%
+client.test("Request executed successfully", function() {
+   client.assert(response.status === 401, "Response status is not 401");
+});
+%}
+
 ### Get clients
 GET {{api}}/clients
 Authorization: Bearer {{token}}
