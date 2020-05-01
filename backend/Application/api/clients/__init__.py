@@ -5,23 +5,28 @@ from flask_restful import Resource, reqparse
 from Application import db
 from Application.models.ClientTable import Client
 
-create_parser = reqparse.RequestParser()
-create_parser.add_argument('name', type=str, required=True)
-create_parser.add_argument('street', type=str, required=True)
-create_parser.add_argument('streetNumber', type=str, required=True)
-create_parser.add_argument('postalCode', type=int, required=True)
-create_parser.add_argument('city', type=str, required=True)
-create_parser.add_argument('firm', type=bool, required=True)
-create_parser.add_argument('vatNumber', type=str, required=True)
+CREATE_PARSER = reqparse.RequestParser()
+CREATE_PARSER.add_argument('name', type=str, required=True)
+CREATE_PARSER.add_argument('street', type=str, required=True)
+CREATE_PARSER.add_argument('streetNumber', type=str, required=True)
+CREATE_PARSER.add_argument('postalCode', type=int, required=True)
+CREATE_PARSER.add_argument('city', type=str, required=True)
+CREATE_PARSER.add_argument('firm', type=bool, required=True)
+CREATE_PARSER.add_argument('vatNumber', type=str, required=True)
 
-delete_parser = reqparse.RequestParser()
-delete_parser.add_argument('name', type=str, required=True)
+DELETE_PARSER = reqparse.RequestParser()
+DELETE_PARSER.add_argument('name', type=str, required=True)
 
 
 class Clients(Resource):
+    """ Class used for all API requests concerning clients"""
+
     method_decorators = [jwt_required()]
 
-    def get(self):
+    @staticmethod
+    def get():
+        """Return all informations about all the clients"""
+
         clients = Client.query.all()
 
         parse_client = []
@@ -31,8 +36,11 @@ class Clients(Resource):
 
         return jsonify(parse_client)
 
-    def post(self):
-        args = create_parser.parse_args()
+    @staticmethod
+    def post():
+        """Post a new client to the database"""
+
+        args = CREATE_PARSER.parse_args()
 
         name = args['name']
 
@@ -70,8 +78,11 @@ class Clients(Resource):
 
         return response
 
-    def delete(self):
-        args = delete_parser.parse_args()
+    @staticmethod
+    def delete():
+        """Delete a client in the database"""
+
+        args = DELETE_PARSER.parse_args()
 
         name = args['name']
 
@@ -96,6 +107,8 @@ class Clients(Resource):
 
 
 def build_item(client):
+    """A function used to help jsonify data for the get function"""
+
     client = {
         "name": client.name,
         "street": client.street,
