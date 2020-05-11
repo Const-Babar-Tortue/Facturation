@@ -75,7 +75,7 @@ export default {
             callback: false
         },
         watchLoggedIn: true,
-        cookie: true,
+        cookie: false,
         strategies: {
             local: {
                 endpoints: {
