@@ -112,6 +112,9 @@
 
     export default {
         name: "Register",
+        head: () => ({
+            title: 'Create clients'
+        }),
         components: {
             Centered,
             ValidationObserver,

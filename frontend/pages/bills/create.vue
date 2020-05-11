@@ -93,6 +93,9 @@
 
     export default {
         name: "Register",
+        head: () => ({
+            title: 'Create bills'
+        }),
         components: {
             Centered,
             ValidationObserver,

@@ -13,6 +13,9 @@
 
 <script>
     export default {
+        head: () => ({
+            title: 'Home'
+        }),
         options: {
             auth: false,
         },

@@ -54,6 +54,9 @@
 
     export default {
         name: "Login",
+        head: () => ({
+            title: 'Login'
+        }),
         components: {
             Centered,
             ValidationObserver,

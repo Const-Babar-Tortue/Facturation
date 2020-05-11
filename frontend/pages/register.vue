@@ -87,6 +87,9 @@
 
     export default {
         name: "Register",
+        head: () => ({
+            title: 'Register'
+        }),
         components: {
             Centered,
             ValidationObserver,

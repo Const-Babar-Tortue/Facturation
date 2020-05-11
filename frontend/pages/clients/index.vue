@@ -9,6 +9,9 @@
 <script>
     export default {
         name: "clients",
+        head: () => ({
+            title: 'Clients'
+        }),
         data: () => ({
             clients: []
         }),
