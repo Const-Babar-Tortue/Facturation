@@ -12,12 +12,12 @@
 </template>
 
 <script>
-    export default {
-        head: () => ({
-            title: 'Home'
-        }),
-        options: {
-            auth: false,
-        },
-    }
+export default {
+    head: () => ({
+        title: 'Home',
+    }),
+    options: {
+        auth: false,
+    },
+}
 </script>

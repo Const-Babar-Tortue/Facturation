@@ -7,7 +7,7 @@
 </template>
 
 <script>
-    export default {
-        name: "Centered"
-    }
+export default {
+    name: 'Centered',
+}
 </script>

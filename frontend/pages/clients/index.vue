@@ -9,20 +9,19 @@
 </template>
 
 <script>
-    import DataTable from "@/components/DataTable";
+import DataTable from '@/components/DataTable'
 
-    export default {
-        name: "clients",
-        components: {DataTable},
-        head: () => ({
-            title: 'Clients'
-        }),
-        data: () => ({
-            clients: []
-        }),
-        mounted() {
-            this.$axios.get('/clients')
-                .then(({data}) => this.clients = data)
-        }
-    }
+export default {
+    name: 'Clients',
+    components: { DataTable },
+    data: () => ({
+        clients: [],
+    }),
+    mounted() {
+        this.$axios.get('/clients').then(({ data }) => (this.clients = data))
+    },
+    head: () => ({
+        title: 'Clients',
+    }),
+}
 </script>

@@ -9,16 +9,16 @@
 </template>
 
 <script>
-    import DataTable from "@/components/DataTable";
+import DataTable from '@/components/DataTable'
 
-    export default {
-        name: "index",
-        components: {DataTable},
-        head: () => ({
-            title: 'Bills'
-        }),
-        data: () => ({
-            bills: []
-        })
-    }
+export default {
+    name: 'Index',
+    components: { DataTable },
+    data: () => ({
+        bills: [],
+    }),
+    head: () => ({
+        title: 'Bills',
+    }),
+}
 </script>

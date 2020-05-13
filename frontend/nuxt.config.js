@@ -3,8 +3,8 @@ const env = require('dotenv').config().parsed
 export default {
     mode: 'universal',
     /*
-    ** Headers of the page
-    */
+     ** Headers of the page
+     */
     head: {
         titleTemplate: '%s - facturesoft',
         title: 'facturesoft',
@@ -12,35 +12,38 @@ export default {
             lang: 'en',
         },
         meta: [
-            {charset: 'utf-8'},
-            {name: 'viewport', content: 'width=device-width, initial-scale=1'},
-            {hid: 'description', name: 'description', content: process.env.npm_package_description || ''}
+            { charset: 'utf-8' },
+            {
+                name: 'viewport',
+                content: 'width=device-width, initial-scale=1',
+            },
+            {
+                hid: 'description',
+                name: 'description',
+                content: process.env.npm_package_description || '',
+            },
         ],
-        link: [
-            {rel: 'icon', type: 'image/x-icon', href: '/favicon.ico'}
-        ]
+        link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
     },
     /*
-    ** Customize the progress-bar color
-    */
-    loading: {color: '#fff'},
+     ** Customize the progress-bar color
+     */
+    loading: { color: '#fff' },
     /*
-    ** Global CSS
-    */
-    css: [
-        '~/assets/main.css'
-    ],
+     ** Global CSS
+     */
+    css: ['~/assets/main.css'],
     /*
-    ** Plugins to load before mounting the App
-    */
-    plugins: ["~/plugins/axios.js"],
+     ** Plugins to load before mounting the App
+     */
+    plugins: ['~/plugins/axios.js'],
     /*
-    ** Nuxt.js dev-modules
-    */
+     ** Nuxt.js dev-modules
+     */
     buildModules: ['@nuxtjs/dotenv'],
     /*
-    ** Nuxt.js modules
-    */
+     ** Nuxt.js modules
+     */
     modules: [
         // Doc: https://bootstrap-vue.js.org
         'bootstrap-vue/nuxt',
@@ -48,23 +51,19 @@ export default {
         '@nuxtjs/auth',
     ],
     /*
-    ** Build configuration
-    */
+     ** Build configuration
+     */
     build: {
         // Add exception
-        transpile: [
-            "vee-validate/dist/rules",
-            'vee-validate'
-        ],
+        transpile: ['vee-validate/dist/rules', 'vee-validate'],
         /*
-        ** You can extend webpack config here
-        */
-        extend(config, ctx) {
-        }
+         ** You can extend webpack config here
+         */
+        extend(config, ctx) {},
     },
 
     env: {
-        API_HOST: env.API_HOST
+        API_HOST: env.API_HOST,
     },
 
     router: {
@@ -76,7 +75,7 @@ export default {
             login: '/login',
             logout: '/',
             home: '/',
-            callback: false
+            callback: false,
         },
         watchLoggedIn: true,
         cookie: true,
