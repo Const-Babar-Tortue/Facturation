@@ -1,9 +1,7 @@
 <template>
-    <div class="row d-flex justify-content-center">
-        <div class="mt-3 col-md-6">
-            <slot></slot>
-        </div>
-    </div>
+    <b-container>
+        <slot></slot>
+    </b-container>
 </template>
 
 <script>

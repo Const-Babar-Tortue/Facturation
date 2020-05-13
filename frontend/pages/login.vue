@@ -1,30 +1,18 @@
 <template>
     <Centered>
-        <b-card header="Create an account">
-            <ValidationObserver ref="observer" v-slot="{ passes }">
-                <b-form @submit.prevent="passes(onSubmit)">
-                    <b-alert
-                        :show="invalid"
-                        variant="danger"
-                        dismissible
-                        class="mt-3"
-                    >
-                        Invalid credentials
-                    </b-alert>
+        <b-card header="Login">
+            <ValidationObserver ref="observer" v-slot="{ handleSubmit, valid }">
+                <b-form @submit.prevent="handleSubmit(onSubmit)">
+                    <DangerAlert :show="invalid" msg="Invalid credentials" />
 
-                    <b-alert
+                    <DangerAlert
                         :show="error"
-                        variant="danger"
-                        dismissible
-                        class="mt-3"
-                    >
-                        An error occurred while registering
-                    </b-alert>
+                        msg="An error occurred while logging in"
+                    />
 
                     <BTextInputWithValidation
                         v-model="username"
                         rules="required"
-                        type="text"
                         label="Username:"
                         name="Username"
                         placeholder="Enter a username"
@@ -37,11 +25,12 @@
                         vid="password"
                         type="password"
                         label="Password"
-                        description="We'll never share your password with anyone else"
                         placeholder="Enter password"
                     />
 
-                    <b-button type="submit" variant="primary">Submit</b-button>
+                    <b-button type="submit" :disabled="!valid" variant="primary"
+                        >Submit</b-button
+                    >
                 </b-form>
             </ValidationObserver>
         </b-card>
@@ -49,20 +38,17 @@
 </template>
 
 <script>
-import { extend, ValidationObserver } from 'vee-validate'
-import { required } from 'vee-validate/dist/rules'
+import { ValidationObserver } from 'vee-validate'
+import '@/validation/rules'
 
+import DangerAlert from '@/components/DangerAlert'
 import Centered from '@/components/Centered'
-import BTextInputWithValidation from '@/components/BTextInputWithValidation'
-
-extend('required', {
-    ...required,
-    message: 'The {_field_} field is required',
-})
+import BTextInputWithValidation from '@/components/inputs/BTextInputWithValidation'
 
 export default {
     name: 'Login',
     components: {
+        DangerAlert,
         Centered,
         ValidationObserver,
         BTextInputWithValidation,

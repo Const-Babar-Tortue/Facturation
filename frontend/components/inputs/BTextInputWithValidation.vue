@@ -26,18 +26,13 @@ export default {
         ValidationProvider,
     },
     props: {
-        // eslint-disable-next-line
         vid: {
             type: String,
+            default: '',
         },
         rules: {
             type: [Object, String],
             default: '',
-        },
-        // must be included in props
-        // eslint-disable-next-line
-        value: {
-            type: null,
         },
     },
     data: () => ({

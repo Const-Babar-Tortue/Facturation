@@ -1,7 +1,9 @@
 <template>
-    <div class="h-100">
+    <div>
         <Navbar />
-        <nuxt />
+        <b-container fluid="" class="mt-5">
+            <nuxt />
+        </b-container>
     </div>
 </template>
 

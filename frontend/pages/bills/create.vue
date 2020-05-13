@@ -1,36 +1,30 @@
 <template>
     <Centered>
-        <b-card header="Create an Bill">
-            <ValidationObserver ref="observer" v-slot="{ passes }">
-                <b-form @submit.prevent="passes(onSubmit)">
-                    <b-alert
+        <b-card header="Create a Bill">
+            <ValidationObserver ref="observer" v-slot="{ handleSubmit, valid }">
+                <b-form @submit.prevent="handleSubmit(onSubmit)">
+                    <DangerAlert
                         :show="exists"
-                        variant="danger"
-                        dismissible
-                        class="mt-3"
-                    >
-                        A bill with that name already exists
-                    </b-alert>
+                        msg="A bill with that name already exists"
+                    />
 
-                    <b-alert
+                    <DangerAlert
                         :show="error"
-                        variant="danger"
-                        dismissible
-                        class="mt-3"
-                    >
-                        An error occurred while add this bill
-                    </b-alert>
+                        msg="An error occurred while adding this bill"
+                    />
 
+                    <label for="client">Choose a client</label>
                     <b-form-select
+                        id="client"
                         v-model="client"
+                        name="client"
                         required
                         :options="clients"
                     ></b-form-select>
 
                     <BTextInputWithValidation
                         v-model="number"
-                        rules="required"
-                        type="number"
+                        rules="required|numeric"
                         label="Number:"
                         name="Number"
                         placeholder="Enter a number"
@@ -41,6 +35,7 @@
                         id="date"
                         v-model="date"
                         class="mb-2"
+                        required
                     ></b-form-datepicker>
 
                     <label for="expiration">Choose an expiration date</label>
@@ -48,12 +43,12 @@
                         id="expiration"
                         v-model="expiration"
                         class="mb-2"
+                        required
                     ></b-form-datepicker>
 
                     <BTextInputWithValidation
                         v-model="price"
-                        rules="required"
-                        type="number"
+                        rules="required|numeric"
                         label="Price:"
                         name="Price"
                         placeholder="Enter a price"
@@ -78,7 +73,13 @@
                         Paid
                     </b-form-checkbox>
 
-                    <b-button type="submit" variant="primary">Submit</b-button>
+                    <b-button
+                        type="submit"
+                        :disabled="!valid"
+                        variant="primary"
+                    >
+                        Submit
+                    </b-button>
                 </b-form>
             </ValidationObserver>
         </b-card>
@@ -86,34 +87,17 @@
 </template>
 
 <script>
-import { extend, ValidationObserver } from 'vee-validate'
-import { confirmed, email, required } from 'vee-validate/dist/rules'
-import Centered from '@/components/Centered'
-import BTextInputWithValidation from '@/components/BTextInputWithValidation'
+import { ValidationObserver } from 'vee-validate'
+import '@/validation/rules'
 
-extend('email', {
-    ...email,
-    message: 'The {_field_} field must be a valid email',
-})
-extend('confirmed', {
-    ...confirmed,
-    message: 'Both passwords do not match',
-})
-extend('min', {
-    validate(value, { length }) {
-        return value.length >= length
-    },
-    params: ['length'],
-    message: 'The {_field_} field must have at least {length} characters',
-})
-extend('required', {
-    ...required,
-    message: 'The {_field_} field is required',
-})
+import DangerAlert from '@/components/DangerAlert'
+import Centered from '@/components/Centered'
+import BTextInputWithValidation from '@/components/inputs/BTextInputWithValidation'
 
 export default {
     name: 'Register',
     components: {
+        DangerAlert,
         Centered,
         ValidationObserver,
         BTextInputWithValidation,

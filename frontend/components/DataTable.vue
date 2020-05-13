@@ -1,12 +1,12 @@
 <template>
-    <b-card>
+    <b-card no-body>
         <template v-slot:header>
             <div class="d-flex justify-content-between">
                 <span class="my-auto">{{ title }}</span>
                 <b-btn variant="primary" :to="destination">Create</b-btn>
             </div>
         </template>
-        <b-table responsive="" striped hover :items="items" />
+        <b-table class="m-0" responsive="" striped hover :items="items" />
     </b-card>
 </template>
 

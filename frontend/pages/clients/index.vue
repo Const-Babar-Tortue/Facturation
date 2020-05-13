@@ -1,5 +1,5 @@
 <template>
-    <b-container class="mt-5">
+    <b-container>
         <DataTable
             title="Clients"
             destination="/clients/create"

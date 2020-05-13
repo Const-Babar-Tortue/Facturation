@@ -1,30 +1,21 @@
 <template>
     <Centered>
-        <b-card header="Create an client">
-            <ValidationObserver ref="observer" v-slot="{ passes }">
-                <b-form @submit.prevent="passes(onSubmit)">
-                    <b-alert
+        <b-card header="Create a client">
+            <ValidationObserver ref="observer" v-slot="{ handleSubmit, valid }">
+                <b-form @submit.prevent="handleSubmit(onSubmit)">
+                    <DangerAlert
                         :show="exists"
-                        variant="danger"
-                        dismissible
-                        class="mt-3"
-                    >
-                        A client with that name already exists
-                    </b-alert>
+                        msg="A client with that name already exists"
+                    />
 
-                    <b-alert
+                    <DangerAlert
                         :show="error"
-                        variant="danger"
-                        dismissible
-                        class="mt-3"
-                    >
-                        An error occurred while add this client
-                    </b-alert>
+                        msg="An error occurred while add this client"
+                    />
 
                     <BTextInputWithValidation
                         v-model="name"
-                        rules="required|min:5"
-                        type="text"
+                        rules="required|min:3"
                         label="Name:"
                         name="Name"
                         placeholder="Enter a name"
@@ -32,8 +23,7 @@
 
                     <BTextInputWithValidation
                         v-model="street"
-                        rules="required"
-                        type="text"
+                        rules="required|min:3"
                         label="Street:"
                         name="Street"
                         placeholder="Enter a street"
@@ -41,8 +31,7 @@
 
                     <BTextInputWithValidation
                         v-model="number"
-                        rules="required"
-                        type="text"
+                        rules="required|min:3"
                         label="Number:"
                         name="Number"
                         placeholder="Enter a street number"
@@ -50,8 +39,7 @@
 
                     <BTextInputWithValidation
                         v-model="postal"
-                        rules="required"
-                        type="number"
+                        rules="required|numeric|min:3"
                         label="Postal code:"
                         name="Postal"
                         placeholder="Enter a postal code"
@@ -59,32 +47,33 @@
 
                     <BTextInputWithValidation
                         v-model="city"
-                        rules="required"
-                        type="text"
+                        rules="required|min:3"
                         label="City:"
                         name="City"
                         placeholder="Enter a city"
                     />
 
-                    <b-form-checkbox
-                        id="firm"
-                        v-model="firm"
-                        name="firm"
-                        value="true"
-                    >
-                        firm
-                    </b-form-checkbox>
-
                     <BTextInputWithValidation
                         v-model="vat"
                         rules="required"
-                        type="text"
                         label="VAT:"
                         name="Vat"
                         placeholder="Enter a Vat number"
                     />
 
-                    <b-button type="submit" variant="primary">Submit</b-button>
+                    <b-form-group>
+                        <b-form-checkbox
+                            id="firm"
+                            v-model="firm"
+                            name="firm"
+                            value="true"
+                            >firm
+                        </b-form-checkbox>
+                    </b-form-group>
+
+                    <b-button type="submit" :disabled="!valid" variant="primary"
+                        >Submit
+                    </b-button>
                 </b-form>
             </ValidationObserver>
         </b-card>
@@ -92,34 +81,17 @@
 </template>
 
 <script>
-import { extend, ValidationObserver } from 'vee-validate'
-import { confirmed, email, required } from 'vee-validate/dist/rules'
-import Centered from '@/components/Centered'
-import BTextInputWithValidation from '@/components/BTextInputWithValidation'
+import { ValidationObserver } from 'vee-validate'
+import '@/validation/rules'
 
-extend('email', {
-    ...email,
-    message: 'The {_field_} field must be a valid email',
-})
-extend('confirmed', {
-    ...confirmed,
-    message: 'Both passwords do not match',
-})
-extend('min', {
-    validate(value, { length }) {
-        return value.length >= length
-    },
-    params: ['length'],
-    message: 'The {_field_} field must have at least {length} characters',
-})
-extend('required', {
-    ...required,
-    message: 'The {_field_} field is required',
-})
+import Centered from '@/components/Centered'
+import BTextInputWithValidation from '@/components/inputs/BTextInputWithValidation'
+import DangerAlert from '@/components/DangerAlert'
 
 export default {
     name: 'Register',
     components: {
+        DangerAlert,
         Centered,
         ValidationObserver,
         BTextInputWithValidation,
