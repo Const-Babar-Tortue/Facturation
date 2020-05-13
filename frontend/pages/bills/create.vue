@@ -124,6 +124,9 @@
                 this.register()
             },
             register() {
+                this.$axios.post('/bills', {
+
+                })
             },
 
         }

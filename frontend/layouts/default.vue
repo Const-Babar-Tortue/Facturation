@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="h-100">
         <Navbar/>
         <nuxt/>
     </div>
@@ -14,3 +14,9 @@
         }
     }
 </script>
+
+<style>
+    body,html {
+        height: 100%;
+    }
+</style>

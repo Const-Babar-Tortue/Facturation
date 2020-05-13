@@ -1,14 +1,19 @@
 <template>
     <b-container class="mt-5">
-        <b-card header="Clients">
-            <b-table striped hover :items="clients"></b-table>
-        </b-card>
+        <DataTable
+            title="Clients"
+            destination="/clients/create"
+            :items="clients"
+        ></DataTable>
     </b-container>
 </template>
 
 <script>
+    import DataTable from "@/components/DataTable";
+
     export default {
         name: "clients",
+        components: {DataTable},
         head: () => ({
             title: 'Clients'
         }),
