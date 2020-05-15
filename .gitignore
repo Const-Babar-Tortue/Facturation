@@ -98,3 +98,4 @@ sw.*
 dist/
 *.iml
 *.private.env.json
+tests_output/

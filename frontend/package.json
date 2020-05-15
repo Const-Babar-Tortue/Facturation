@@ -1,34 +1,37 @@
 {
-  "name": "nuxt",
-  "version": "1.0.0",
-  "description": "Bill App",
-  "author": "Hubert Van De Walle",
-  "private": true,
-  "scripts": {
-    "dev": "nuxt",
-    "build": "nuxt build",
-    "start": "nuxt start",
-    "generate": "nuxt generate",
-    "lint": "eslint --ext .js,.vue --ignore-path ../.gitignore .",
-    "lintfix": "eslint --fix --ext .js,.vue --ignore-path ../.gitignore ."
-  },
-  "dependencies": {
-    "@nuxtjs/auth": "^4.9.1",
-    "@nuxtjs/axios": "^5.9.7",
-    "bootstrap": "^4.1.3",
-    "bootstrap-vue": "^2.0.0",
-    "nuxt": "^2.0.0",
-    "vee-validate": "^3.2.5"
-  },
-  "devDependencies": {
-    "@nuxtjs/dotenv": "^1.4.1",
-    "@nuxtjs/eslint-config": "^3.0.0",
-    "@nuxtjs/eslint-module": "^2.0.0",
-    "babel-eslint": "^10.1.0",
-    "eslint": "^7.0.0",
-    "eslint-config-prettier": "^6.11.0",
-    "eslint-plugin-nuxt": "^1.0.0",
-    "eslint-plugin-prettier": "^3.1.3",
-    "prettier": "^2.0.5"
-  }
+    "name": "nuxt",
+    "version": "1.0.0",
+    "description": "Bill App",
+    "author": "Hubert Van De Walle",
+    "private": true,
+    "scripts": {
+        "dev": "nuxt",
+        "build": "nuxt build",
+        "start": "nuxt start",
+        "generate": "nuxt generate",
+        "lint": "eslint --ext .js,.vue --ignore-path ../.gitignore .",
+        "lintfix": "eslint --fix --ext .js,.vue --ignore-path ../.gitignore .",
+        "test:e2e": "nightwatch"
+    },
+    "dependencies": {
+        "@nuxtjs/auth": "^4.9.1",
+        "@nuxtjs/axios": "^5.9.7",
+        "bootstrap": "^4.1.3",
+        "bootstrap-vue": "^2.0.0",
+        "nuxt": "^2.0.0",
+        "vee-validate": "^3.2.5"
+    },
+    "devDependencies": {
+        "@nuxtjs/dotenv": "^1.4.1",
+        "@nuxtjs/eslint-config": "^3.0.0",
+        "@nuxtjs/eslint-module": "^2.0.0",
+        "babel-eslint": "^10.1.0",
+        "eslint": "^7.0.0",
+        "eslint-config-prettier": "^6.11.0",
+        "eslint-plugin-nuxt": "^1.0.0",
+        "eslint-plugin-prettier": "^3.1.3",
+        "geckodriver": "^1.19.1",
+        "nightwatch": "^1.3.5",
+        "prettier": "^2.0.5"
+    }
 }
