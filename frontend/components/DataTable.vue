@@ -2,7 +2,10 @@
     <b-card no-body>
         <template v-slot:header>
             <div class="d-flex justify-content-between">
-                <span class="my-auto">{{ title }}</span>
+                <div class="my-auto">
+                    <span class="my-auto">{{ title }}</span>
+                    <b-badge pill class="my-auto">{{ items.length }}</b-badge>
+                </div>
                 <b-btn variant="primary" :to="destination">Create</b-btn>
             </div>
         </template>
