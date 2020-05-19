@@ -10,7 +10,7 @@ parser = reqparse.RequestParser()
 parser.add_argument('username', type=str)
 parser.add_argument('number', type=int)
 parser.add_argument('date', type=str)
-parser.add_argument('expiration_date', type=str)
+parser.add_argument('expiration', type=str)
 parser.add_argument('price', type=float)
 parser.add_argument('is_cash', type=bool)
 parser.add_argument('is_paid', type=bool)
@@ -40,7 +40,7 @@ class Bills(Resource):
         client_id = client.id
         number = args['number']
         date = args['date']
-        exp_date = args['expiration_date']
+        exp_date = args['expiration']
         price = args['price']
         is_cash = args['is_cash']
         is_paid = args['is_paid']
