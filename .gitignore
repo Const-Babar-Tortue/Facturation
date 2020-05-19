@@ -3,6 +3,7 @@ __pycache__
 venv
 .idea
 *.db
+.vscode
 
 # Created by .ignore support plugin (hsz.mobi)
 ### Node template
