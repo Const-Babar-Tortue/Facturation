@@ -4,9 +4,10 @@ from flask_restful import Resource, reqparse
 
 from Application import db
 from Application.models.BillTable import Bill
+from Application.models.ClienTable import Client
 
 parser = reqparse.RequestParser()
-parser.add_argument('username', type=int)
+parser.add_argument('username', type=str)
 parser.add_argument('number', type=int)
 parser.add_argument('date', type=str)
 parser.add_argument('expiration_date', type=str)
@@ -30,13 +31,32 @@ class Bills(Resource):
     def post(self):
         args = parser.parse_args()
 
-        client = args['username']
+        client_name = args['username']
+
+        client = Client.query.filter(
+            (Client.name == client_name)
+        )
+
+        client_id = client.id
         number = args['number']
         date = args['date']
-        exp_date = args['expiratio_date']
+        exp_date = args['expiration_date']
         price = args['price']
         is_cash = args['is_cash']
         is_paid = args['is_paid']
+
+        bill = Bill(
+            client_id = client_id,
+            number = number,
+            date = date,
+            expiration = exp_date,
+            price = price,
+            cash = is_cash,
+            paid = is_paid
+        )
+
+        db.session.add(bill)
+        db.session.commit()
 
         response = jsonify({"message": "Created"})
         response.status_code = 201
