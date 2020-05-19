@@ -15,6 +15,8 @@ parser.add_argument('price', type=float)
 parser.add_argument('is_cash', type=bool)
 parser.add_argument('is_paid', type=bool)
 
+delete_parser = reqparse.RequestParser()
+delete_parser.add_argument('number', type=int, required=True)
 
 class Bills(Resource):
     method_decorators = [jwt_required()]
@@ -60,6 +62,30 @@ class Bills(Resource):
 
         response = jsonify({"message": "Created"})
         response.status_code = 201
+        return response
+
+    def delete(self):
+        args = delete_parser.parse_args()
+
+        number = args["number"]
+
+        existing_bill = Bill.query.filter(
+            Bill.number == number
+        ).first()
+
+        if existing_bill is None:
+            response = jsonify({"message": "Bill does not exists"})
+            response.status_code = 404
+            return response
+        
+        Bill.query.filter(
+            Bill.number ==number
+        ).delete()
+        db.session.commit()
+
+        response = jsonify({'message': 'Deleted'})
+        response.status_code = 200
+
         return response
 
 
