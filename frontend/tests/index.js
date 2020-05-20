@@ -47,8 +47,6 @@ module.exports = {
             .assert.containsText('button[type=button]', 'Logout')
             .assert.containsText('a[href="/clients"]', 'Clients')
             .assert.containsText('a[href="/bills"]', 'Bills')
-            .click('a[href="/clients"]')
-            .assert.urlEquals(`${baseUrl}/clients`)
     },
 
     'Test clients list'(browser) {
@@ -63,7 +61,7 @@ module.exports = {
             .assert.urlEquals(`${baseUrl}/clients/create`)
             .setValue('input[name=Name]', companyName)
             .setValue('input[name=Street]', faker.address.streetName())
-            .setValue('input[name=Number]', '123')
+            .setValue('input[name=Number]', faker.random.number().toString())
             .setValue('input[name=Postal]', faker.address.zipCode())
             .setValue('input[name=City]', faker.address.city())
             .setValue('input[name=Vat]', faker.finance.iban())

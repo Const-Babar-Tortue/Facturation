@@ -2,7 +2,7 @@
     <Centered>
         <b-card header="Login">
             <ValidationObserver ref="observer" v-slot="{ handleSubmit, valid }">
-                <b-form @submit.prevent="handleSubmit(onSubmit)">
+                <form @submit.prevent="handleSubmit(onSubmit)">
                     <DangerAlert :show="invalid" msg="Invalid credentials" />
 
                     <DangerAlert
@@ -31,7 +31,7 @@
                     <b-button type="submit" :disabled="!valid" variant="primary"
                         >Submit</b-button
                     >
-                </b-form>
+                </form>
             </ValidationObserver>
         </b-card>
     </Centered>
