@@ -4,7 +4,7 @@ from flask_restful import Resource, reqparse
 
 from Application import db
 from Application.models.BillTable import Bill
-from Application.models.ClienTable import Client
+from Application.models.ClientTable import Client
 
 parser = reqparse.RequestParser()
 parser.add_argument('username', type=str)
@@ -17,6 +17,7 @@ parser.add_argument('is_paid', type=bool)
 
 delete_parser = reqparse.RequestParser()
 delete_parser.add_argument('number', type=int, required=True)
+
 
 class Bills(Resource):
     method_decorators = [jwt_required()]
@@ -48,13 +49,13 @@ class Bills(Resource):
         is_paid = args['is_paid']
 
         bill = Bill(
-            client_id = client_id,
-            number = number,
-            date = date,
-            expiration = exp_date,
-            price = price,
-            cash = is_cash,
-            paid = is_paid
+            client_id=client_id,
+            number=number,
+            date=date,
+            expiration=exp_date,
+            price=price,
+            cash=is_cash,
+            paid=is_paid
         )
 
         db.session.add(bill)
@@ -77,9 +78,9 @@ class Bills(Resource):
             response = jsonify({"message": "Bill does not exists"})
             response.status_code = 404
             return response
-        
+
         Bill.query.filter(
-            Bill.number ==number
+            Bill.number == number
         ).delete()
         db.session.commit()
 
@@ -95,6 +96,7 @@ def calculate_vat(amount):
 
 def total_with_vat(amount):
     return amount + calculate_vat(amount)
+
 
 def build_item(bill):
     bill = {
