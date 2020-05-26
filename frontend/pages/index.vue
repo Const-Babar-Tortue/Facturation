@@ -2,10 +2,13 @@
     <b-container class="mt-5">
         <b-row>
             <b-col>
-                <b-jumbotron header="Facturation" lead="blablabla">
-                    <p>blablabla</p>
-                    <b-button variant="primary" to="/bills">Bills</b-button>
-                </b-jumbotron>
+                <b-jumbotron
+                    bg-variant="info"
+                    text-variant="white"
+                    border-variant="dark"
+                    header="Facture Soft"
+                    lead="A web app made to organize your bills"
+                />
             </b-col>
         </b-row>
     </b-container>
