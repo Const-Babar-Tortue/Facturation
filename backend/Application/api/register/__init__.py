@@ -8,9 +8,9 @@ from Application import db
 from Application.models.UserTable import User
 
 parser = reqparse.RequestParser()
-parser.add_argument('username', type=str)
-parser.add_argument('email', type=str)
-parser.add_argument('password', type=str)
+parser.add_argument("username", type=str)
+parser.add_argument("email", type=str)
+parser.add_argument("password", type=str)
 
 
 class Register(Resource):
@@ -18,9 +18,9 @@ class Register(Resource):
         print(current_identity)
         args = parser.parse_args()
 
-        username = args['username']
-        email = args['email']
-        password = args['password']
+        username = args["username"]
+        email = args["email"]
+        password = args["password"]
 
         existing_user = User.query.filter(
             (User.username == username) | (User.email == email)
@@ -32,10 +32,7 @@ class Register(Resource):
             return response
 
         user = User(
-            username=username,
-            email=email,
-            created_on=datetime.now(),
-            admin=False
+            username=username, email=email, created_on=datetime.now(), admin=False
         )
         user.set_password(password)
 

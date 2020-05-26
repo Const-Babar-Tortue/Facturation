@@ -17,9 +17,6 @@ class Users(Resource):
             response.status_code = 410
             return response
 
-        user = {
-            'username': current_identity.username,
-            'email': current_identity.email
-        }
+        user = {"username": current_identity.username, "email": current_identity.email}
 
-        return jsonify({'user': user})
+        return jsonify({"user": user})

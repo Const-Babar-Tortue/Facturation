@@ -7,16 +7,16 @@ from Application.models.ClientTable import Client
 from Application.models.BillTable import Bill
 
 create_parser = reqparse.RequestParser()
-create_parser.add_argument('name', type=str, required=True)
-create_parser.add_argument('street', type=str, required=True)
-create_parser.add_argument('streetNumber', type=str, required=True)
-create_parser.add_argument('postalCode', type=int, required=True)
-create_parser.add_argument('city', type=str, required=True)
-create_parser.add_argument('firm', type=bool, required=True)
-create_parser.add_argument('vatNumber', type=str, required=True)
+create_parser.add_argument("name", type=str, required=True)
+create_parser.add_argument("street", type=str, required=True)
+create_parser.add_argument("streetNumber", type=str, required=True)
+create_parser.add_argument("postalCode", type=int, required=True)
+create_parser.add_argument("city", type=str, required=True)
+create_parser.add_argument("firm", type=bool, required=True)
+create_parser.add_argument("vatNumber", type=str, required=True)
 
 delete_parser = reqparse.RequestParser()
-delete_parser.add_argument('id', type=int, required=True)
+delete_parser.add_argument("id", type=int, required=True)
 
 
 class Clients(Resource):
@@ -35,23 +35,21 @@ class Clients(Resource):
     def post(self):
         args = create_parser.parse_args()
 
-        name = args['name']
+        name = args["name"]
 
-        exists = Client.query.filter(
-            (Client.name == name)
-        ).first()
+        exists = Client.query.filter((Client.name == name)).first()
 
         if exists:
             response = jsonify({"message": "Client already exists"})
             response.status_code = 409
             return response
 
-        street = args['street']
-        street_number = args['streetNumber']
-        postal_code = args['postalCode']
-        city = args['city']
-        firm = args['firm']
-        vat_number = args['vatNumber']
+        street = args["street"]
+        street_number = args["streetNumber"]
+        postal_code = args["postalCode"]
+        city = args["city"]
+        firm = args["firm"]
+        vat_number = args["vatNumber"]
 
         client = Client(
             name=name,
@@ -60,13 +58,13 @@ class Clients(Resource):
             postal_code=postal_code,
             city=city,
             firm=firm,
-            vat_number=vat_number
+            vat_number=vat_number,
         )
 
         db.session.add(client)
         db.session.commit()
 
-        response = jsonify({'message': 'Created'})
+        response = jsonify({"message": "Created"})
         response.status_code = 201
 
         return response
@@ -74,11 +72,9 @@ class Clients(Resource):
     def delete(self):
         args = delete_parser.parse_args()
 
-        id = args['id']
+        id = args["id"]
 
-        existing_client = Client.query.filter(
-            Client.id == id
-        ).first()
+        existing_client = Client.query.filter(Client.id == id).first()
 
         if existing_client is None:
             response = jsonify({"message": "Client does not exists"})
@@ -86,17 +82,13 @@ class Clients(Resource):
             return response
 
         # delete all bills related to this client
-        Bill.query.filter(
-            Bill.client_id == id
-        ).delete()
+        Bill.query.filter(Bill.client_id == id).delete()
 
         # delete the client itself
-        Client.query.filter(
-            Client.id == id
-        ).delete()
+        Client.query.filter(Client.id == id).delete()
         db.session.commit()
 
-        response = jsonify({'message': 'Deleted'})
+        response = jsonify({"message": "Deleted"})
         response.status_code = 200
 
         return response
@@ -111,6 +103,6 @@ def build_item(client):
         "postalCode": client.postal_code,
         "city": client.city,
         "firm": client.firm,
-        "vatNumber": client.vat_number
+        "vatNumber": client.vat_number,
     }
     return client

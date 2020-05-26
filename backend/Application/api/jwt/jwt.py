@@ -8,4 +8,4 @@ def authenticate(username, password):
 
 
 def identity(payload):
-    return User.query.filter(User.id == payload['identity']).first()
+    return User.query.filter(User.id == payload["identity"]).first()

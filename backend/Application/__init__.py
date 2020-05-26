@@ -27,12 +27,13 @@ def init_app():
         db.create_all()
 
         from Application.api.jwt.jwt import authenticate, identity
+
         JWT(app, authenticate, identity)
 
-    api.add_resource(Register, '/register')
-    api.add_resource(Clients, '/clients')
-    api.add_resource(ClientsNames, '/clients/names')
-    api.add_resource(Users, '/user/me')
-    api.add_resource(Bills, '/bills')
+    api.add_resource(Register, "/register")
+    api.add_resource(Clients, "/clients")
+    api.add_resource(ClientsNames, "/clients/names")
+    api.add_resource(Users, "/user/me")
+    api.add_resource(Bills, "/bills")
 
     return app
