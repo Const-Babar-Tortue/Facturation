@@ -1,11 +1,20 @@
 <template>
-    <b-navbar type="dark" variant="dark">
+    <b-navbar type="dark" variant="primary">
+        <b-navbar-brand href="/">FactureSoft</b-navbar-brand>
         <b-navbar-nav>
-            <b-nav-item to="/">Home</b-nav-item>
-            <b-nav-item v-if="isAuthenticated" to="/clients"
-                >Clients</b-nav-item
+            <b-nav-item
+                v-if="isAuthenticated"
+                :active="$route.path.includes('clients')"
+                to="/clients"
             >
-            <b-nav-item v-if="isAuthenticated" to="/bills">Bills</b-nav-item>
+                Clients
+            </b-nav-item>
+            <b-nav-item
+                v-if="isAuthenticated"
+                :active="$route.path.includes('bills')"
+                to="/bills"
+                >Bills</b-nav-item
+            >
         </b-navbar-nav>
 
         <b-navbar-nav class="ml-auto">
