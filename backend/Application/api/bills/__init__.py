@@ -8,7 +8,6 @@ from Application.models.BillTable import Bill
 
 parser = reqparse.RequestParser()
 parser.add_argument("clientId", type=str)
-parser.add_argument("number", type=int)
 parser.add_argument("date", type=str)
 parser.add_argument("expiration", type=str)
 parser.add_argument("price", type=float)
@@ -35,7 +34,6 @@ class Bills(Resource):
     def post(self):
         args = parser.parse_args()
         client_id = args["clientId"]
-        number = args["number"]
         date = dateutil.parser.isoparse(args["date"])
         expiration = dateutil.parser.isoparse(args["expiration"])
         price = args["price"]
@@ -45,7 +43,6 @@ class Bills(Resource):
 
         bill = Bill(
             client_id=client_id,
-            number=number,
             date=date,
             expiration=expiration,
             price=price,
@@ -93,7 +90,6 @@ def build_item(bill):
     bill = {
         "id": bill.id,
         "clientId": bill.client_id,
-        "number": bill.number,
         "date": bill.date.isoformat(),
         "expiration": bill.expiration.isoformat(),
         "price": bill.price,

@@ -22,14 +22,6 @@
                         :options="clients"
                     ></b-form-select>
 
-                    <BTextInputWithValidation
-                        v-model="number"
-                        rules="required|numeric"
-                        label="Number:"
-                        name="Number"
-                        placeholder="Enter a number"
-                    />
-
                     <label for="date">Choose a date</label>
                     <b-form-datepicker
                         id="date"
@@ -103,7 +95,6 @@ export default {
         BTextInputWithValidation,
     },
     data: () => ({
-        number: null,
         date: null,
         expiration: null,
         price: null,
