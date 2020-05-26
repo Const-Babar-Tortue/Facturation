@@ -4,6 +4,7 @@
             title="Bills"
             destination="/bills/create"
             :items="bills"
+            :fields="['id', 'subject', 'price', 'paid', 'date', 'expiration']"
         ></DataTable>
     </b-container>
 </template>
@@ -17,6 +18,9 @@ export default {
     data: () => ({
         bills: [],
     }),
+    mounted() {
+        this.$axios.get('/bills').then(({ data }) => (this.bills = data))
+    },
     head: () => ({
         title: 'Bills',
     }),

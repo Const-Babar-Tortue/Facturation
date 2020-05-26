@@ -9,7 +9,14 @@
                 <b-btn variant="primary" :to="destination">Create</b-btn>
             </div>
         </template>
-        <b-table class="m-0" responsive="" striped hover :items="items" />
+        <b-table
+            class="m-0"
+            responsive=""
+            striped
+            hover
+            :items="items"
+            :fields="fields"
+        />
     </b-card>
 </template>
 
@@ -26,6 +33,10 @@ export default {
             required: true,
         },
         items: {
+            type: Array,
+            required: true,
+        },
+        fields: {
             type: Array,
             required: true,
         },

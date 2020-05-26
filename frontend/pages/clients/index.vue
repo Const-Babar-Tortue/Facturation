@@ -4,7 +4,8 @@
             title="Clients"
             destination="/clients/create"
             :items="clients"
-        ></DataTable>
+            :fields="['id', 'name', 'firm']"
+        />
     </b-container>
 </template>
 
