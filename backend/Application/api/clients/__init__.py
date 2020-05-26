@@ -4,6 +4,7 @@ from flask_restful import Resource, reqparse
 
 from Application import db
 from Application.models.ClientTable import Client
+from Application.models.BillTable import Bill
 
 create_parser = reqparse.RequestParser()
 create_parser.add_argument('name', type=str, required=True)
@@ -15,7 +16,7 @@ create_parser.add_argument('firm', type=bool, required=True)
 create_parser.add_argument('vatNumber', type=str, required=True)
 
 delete_parser = reqparse.RequestParser()
-delete_parser.add_argument('name', type=str, required=True)
+delete_parser.add_argument('id', type=int, required=True)
 
 
 class Clients(Resource):
@@ -73,10 +74,10 @@ class Clients(Resource):
     def delete(self):
         args = delete_parser.parse_args()
 
-        name = args['name']
+        id = args['id']
 
         existing_client = Client.query.filter(
-            Client.name == name
+            Client.id == id
         ).first()
 
         if existing_client is None:
@@ -84,8 +85,14 @@ class Clients(Resource):
             response.status_code = 404
             return response
 
+        # delete all bills related to this client
+        Bill.query.filter(
+            Bill.client_id == id
+        ).delete()
+
+        # delete the client itself
         Client.query.filter(
-            Client.name == name
+            Client.id == id
         ).delete()
         db.session.commit()
 
@@ -97,6 +104,7 @@ class Clients(Resource):
 
 def build_item(client):
     client = {
+        "id": client.id,
         "name": client.name,
         "street": client.street,
         "streetNumber": client.street_number,

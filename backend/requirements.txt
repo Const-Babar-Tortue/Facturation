@@ -7,3 +7,4 @@ Flask-RESTful==0.3.8
 python-dotenv==0.11.0
 flask-cors
 pytest==5.4.1
+python-dateutil

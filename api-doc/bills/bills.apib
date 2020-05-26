@@ -1,0 +1,88 @@
+# Group Bills
+
+## Bills [/bills]
+
+### Get all bills [GET]
+
++ Request (application/json)
+    + Headers
+
+            Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
+
++ Response 200 (application/json)
+    + Body
+
+            [
+                {
+                    "cash": true,
+                    "clientId": 2,
+                    "date": "2020-05-08",
+                    "expiration": "2020-05-08",
+                    "id": 1,
+                    "number": 8319,
+                    "paid": false,
+                    "price": 43035.0,
+                    "subject": "optio enim rerum"
+                },
+                {
+                    "cash": true,
+                    "clientId": 2,
+                    "date": "2020-05-08",
+                    "expiration": "2020-05-08",
+                    "id": 2,
+                    "number": 44007,
+                    "paid": false,
+                    "price": 39642.0,
+                    "subject": "quo quibusdam aut"
+                },
+                {
+                    "cash": false,
+                    "clientId": 2,
+                    "date": "2020-05-08",
+                    "expiration": "2020-05-08",
+                    "id": 3,
+                    "number": 30717,
+                    "paid": true,
+                    "price": 11980.0,
+                    "subject": "totam similique qui"
+                }
+            ]
+
+### Create a bill [POST]
+
++ Request (application/json)
+    + Headers
+
+            Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
+
+    + Body
+
+            {
+                "clientId": 2,
+                "number": 46116,
+                "date": "2020-05-08T11:56:01",
+                "expiration": "2020-05-08T11:56:01",
+                "price": 34403,
+                "cash": false,
+                "paid": false,
+                "subject": "magnam aliquam possimus"
+            }
+
++ Response 201 (application/json)
+    + Attributes (object)
+        + message: Created (string)      
+
+### Delete a bill [DELETE]
+
++ Request (application/json)
+    + Headers
+
+            Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
+
++ Response 200 (application/json)
+    + Attributes (object)
+        + message: Deleted (string)
+
++ Response 404 (application/json)
+    + Attributes (object)
+        + message: Bill does not exists (string) 
