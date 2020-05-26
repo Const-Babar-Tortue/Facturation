@@ -1,6 +1,6 @@
 <template>
     <b-navbar type="dark" variant="primary">
-        <b-navbar-brand href="/">FactureSoft</b-navbar-brand>
+        <b-navbar-brand to="/">FactureSoft</b-navbar-brand>
         <b-navbar-nav>
             <b-nav-item
                 v-if="isAuthenticated"
