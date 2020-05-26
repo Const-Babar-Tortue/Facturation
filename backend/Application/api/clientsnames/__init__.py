@@ -9,16 +9,20 @@ class ClientsNames(Resource):
     method_decorators = [jwt_required()]
 
     def get(self):
-        names_client = Client.query.with_entities(Client.name)
+        clients = Client.query.all()
 
-        parse_name_client = list()
+        response = []
 
-        for resp in names_client:
-            parse_name_client.append(build_item(resp))
+        for client in clients:
+            response.append(build_item(client))
 
-        return jsonify(parse_name_client)
+        return jsonify(response)
 
 
 def build_item(client):
-    name = client.name
-    return name
+    item = {
+        'name': client.name,
+        'id': client.id
+    }
+
+    return item
