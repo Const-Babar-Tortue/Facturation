@@ -11,6 +11,7 @@ from .api.register import Register
 from .api.clients import Clients
 from .api.clientsnames import ClientsNames
 from .api.users import Users
+from .api.bills import Bills
 
 app = Flask(__name__, instance_relative_config=False)
 api = Api(app)
@@ -32,5 +33,6 @@ def init_app():
     api.add_resource(Clients, '/clients')
     api.add_resource(ClientsNames, '/clients/names')
     api.add_resource(Users, '/user/me')
+    api.add_resource(Bills, '/bills')
 
     return app

@@ -1,22 +1,23 @@
-from flask import jsonify
+import dateutil.parser
+from flask import jsonify, flash
 from flask_jwt import jwt_required
 from flask_restful import Resource, reqparse
 
 from Application import db
 from Application.models.BillTable import Bill
-from Application.models.ClientTable import Client
 
 parser = reqparse.RequestParser()
-parser.add_argument('username', type=str)
-parser.add_argument('number', type=int)
-parser.add_argument('date', type=str)
-parser.add_argument('expiration', type=str)
-parser.add_argument('price', type=float)
-parser.add_argument('is_cash', type=bool)
-parser.add_argument('is_paid', type=bool)
+parser.add_argument("clientId", type=str)
+parser.add_argument("number", type=int)
+parser.add_argument("date", type=str)
+parser.add_argument("expiration", type=str)
+parser.add_argument("price", type=float)
+parser.add_argument("cash", type=bool)
+parser.add_argument("paid", type=bool)
+parser.add_argument("subject", type=str)
 
 delete_parser = reqparse.RequestParser()
-delete_parser.add_argument('number', type=int, required=True)
+delete_parser.add_argument("id", type=int, required=True)
 
 
 class Bills(Resource):
@@ -33,29 +34,24 @@ class Bills(Resource):
 
     def post(self):
         args = parser.parse_args()
-
-        client_name = args['username']
-
-        client = Client.query.filter(
-            (Client.name == client_name)
-        )
-
-        client_id = client.id
-        number = args['number']
-        date = args['date']
-        exp_date = args['expiration']
-        price = args['price']
-        is_cash = args['is_cash']
-        is_paid = args['is_paid']
+        client_id = args["clientId"]
+        number = args["number"]
+        date = dateutil.parser.isoparse(args["date"])
+        expiration = dateutil.parser.isoparse(args["expiration"])
+        price = args["price"]
+        is_cash = args["cash"]
+        is_paid = args["paid"]
+        subject = args["subject"]
 
         bill = Bill(
             client_id=client_id,
             number=number,
             date=date,
-            expiration=exp_date,
+            expiration=expiration,
             price=price,
             cash=is_cash,
-            paid=is_paid
+            paid=is_paid,
+            subject=subject,
         )
 
         db.session.add(bill)
@@ -68,30 +64,25 @@ class Bills(Resource):
     def delete(self):
         args = delete_parser.parse_args()
 
-        number = args["number"]
+        id = args["id"]
 
-        existing_bill = Bill.query.filter(
-            Bill.number == number
-        ).first()
+        existing_bill = Bill.query.filter(Bill.id == id).first()
 
         if existing_bill is None:
             response = jsonify({"message": "Bill does not exists"})
             response.status_code = 404
             return response
 
-        Bill.query.filter(
-            Bill.number == number
-        ).delete()
+        Bill.query.filter(Bill.id == id).delete()
         db.session.commit()
 
-        response = jsonify({'message': 'Deleted'})
+        response = jsonify({"message": "Deleted"})
         response.status_code = 200
-
         return response
 
 
 def calculate_vat(amount):
-    return amount * .21
+    return amount * 0.21
 
 
 def total_with_vat(amount):
@@ -100,12 +91,14 @@ def total_with_vat(amount):
 
 def build_item(bill):
     bill = {
-        "client_id": bill.client_id,
+        "id": bill.id,
+        "clientId": bill.client_id,
         "number": bill.number,
-        "date": bill.date,
-        "expiration": bill.expiration,
+        "date": bill.date.isoformat(),
+        "expiration": bill.expiration.isoformat(),
         "price": bill.price,
         "cash": bill.cash,
-        "paid": bill.paid
+        "paid": bill.paid,
+        "subject": bill.subject,
     }
     return bill
