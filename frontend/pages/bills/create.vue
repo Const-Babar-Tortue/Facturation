@@ -22,6 +22,15 @@
                         :options="clients"
                     ></b-form-select>
 
+                    <BTextInputWithValidation
+                        v-model="subject"
+                        rules="required|min:3"
+                        label="Subject:"
+                        name="Subject"
+                        placeholder="Enter a subjet"
+                        step=".01"
+                    />
+
                     <label for="date">Choose a date</label>
                     <b-form-datepicker
                         id="date"
@@ -95,6 +104,7 @@ export default {
         BTextInputWithValidation,
     },
     data: () => ({
+        subject: null,
         date: null,
         expiration: null,
         price: null,
@@ -106,9 +116,13 @@ export default {
         clients: [],
     }),
     mounted() {
-        this.$axios
-            .get('/clients/names')
-            .then(({ data }) => (this.clients = data))
+        this.$axios.get('/clients/names').then(
+            ({ data }) =>
+                (this.clients = data.map((e) => ({
+                    value: e.id,
+                    text: e.name,
+                })))
+        )
     },
     methods: {
         onSubmit() {
@@ -117,7 +131,22 @@ export default {
             this.register()
         },
         register() {
-            this.$axios.post('/bills', {})
+            this.$axios
+                .post('/bills', {
+                    clientId: this.client,
+                    date: this.date,
+                    expiration: this.expiration,
+                    price: this.price,
+                    cash: !!this.cash,
+                    paid: !!this.paid,
+                    subject: this.subject,
+                })
+                .then((_) => this.$router.push('/clients'))
+                .catch((e) => {
+                    if (e.response && e.response.status === 409)
+                        this.exists = true
+                    else this.error = true
+                })
         },
     },
     head: () => ({
