@@ -6,18 +6,21 @@
 
 + Request (application/json)
     + Headers
-        Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
-        
-    + Attributes (object)
-        + name: babar (string)
-        + street: rue de babar (string)
-        + streetNumber: 42A (string)
-        + postCode: 1234 (number)
-        + city: Bruxelles (string)
-        + city: Bruxelles (string)
-        + firm: true (boolean)
-        + vatNumber: i&uéh98979 (string)
-      
+
+            Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
+
+    + Body
+
+            {
+                "name": "Schuyler Spinka Jr.",
+                "street": "Mariana Fork",
+                "streetNumber": "67728",
+                "postalCode": 90786,
+                "city": "Laurentbury",
+                "firm": false,
+                "vatNumber": "IIOAPWZ1390"
+            }
+
 + Response 201 (application/json)
     + Attributes (object)
         + message: Created (string)
@@ -26,28 +29,58 @@
     + Attributes (object)
         + message: Client already exists (string)
         
-        
-## Client Names [/clients/names]
 
-### Get Client Names [GET]
+### Get all clients [GET]
 
 + Request (application/json)
     + Headers
-        Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c     
- 
+
+            Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
+
 
 + Response 200 (application/json)
     + Body
-        ["const","babar","tortue"]
 
+            [
+                {
+                    "city": "West Benjaminberg",
+                    "firm": false,
+                    "id": 4,
+                    "name": "Ms. Frankie McClure",
+                    "postalCode": 25097,
+                    "street": "Lewis Roads",
+                    "streetNumber": "51922",
+                    "vatNumber": "ZDSOMLR1"
+                },
+                {
+                    "city": "Lake Lisa",
+                    "firm": false,
+                    "id": 5,
+                    "name": "Alysha Steuber",
+                    "postalCode": 93476,
+                    "street": "Gottlieb Path",
+                    "streetNumber": "37460",
+                    "vatNumber": "BOYIERM1618"
+                },
+                {
+                    "city": "Nathanmouth",
+                    "firm": false,
+                    "id": 6,
+                    "name": "Velma Reichert",
+                    "postalCode": 89599,
+                    "street": "Jocelyn Square",
+                    "streetNumber": "40435",
+                    "vatNumber": "EIEADOK1"
+                },
+            ]
 
-## Clients [/clients/delete]
 
 ### Delete a client [DELETE]
 
 + Request (application/json)
     + Headers
-        Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
+
+            Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
 
 + Response 200 (application/json)
     + Attributes (object)
@@ -56,3 +89,25 @@
 + Response 404 (application/json)
     + Attributes (object)
         + message: Client does not exists (string)   
+        
+
+## Client Names [/clients/names]
+
+### Get Client Names [GET]
+
++ Request (application/json)
+    + Headers
+
+            Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c     
+ 
+
++ Response 200 (application/json)
+    + Body
+
+            [
+                "Reinhold Gulgowski",
+                "Mr. Cody Daugherty",
+                "Ms. Frankie McClure",
+                "Alysha Steuber"
+            ]
+
