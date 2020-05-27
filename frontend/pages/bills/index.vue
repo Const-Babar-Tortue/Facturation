@@ -13,39 +13,25 @@
                 'expiration',
                 'actions',
             ]"
-            :delete-item="deleteItem"
+            :delete-item="deleteBill"
         ></DataTable>
     </b-container>
 </template>
 
 <script>
+import { mapState, mapActions } from 'vuex'
 import DataTable from '@/components/DataTable'
 
 export default {
     name: 'Index',
     components: { DataTable },
-    data: () => ({
-        bills: [],
-    }),
+    computed: {
+        ...mapState('bills', { bills: (state) => state.bills }),
+    },
     mounted() {
-        this.$axios.get('/bills').then(({ data }) => (this.bills = data))
+        this.$store.dispatch('bills/load')
     },
-    methods: {
-        deleteItem(bill) {
-            this.$axios
-                .delete('/bills', {
-                    data: {
-                        id: bill.id,
-                    },
-                })
-                .then(
-                    (_) =>
-                        (this.bills = this.bills.filter(
-                            (e) => e.id !== bill.id
-                        ))
-                )
-        },
-    },
+    methods: mapActions({ deleteBill: 'bills/delete' }),
     head: () => ({
         title: 'Bills',
     }),
