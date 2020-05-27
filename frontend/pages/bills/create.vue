@@ -141,7 +141,7 @@ export default {
                     paid: !!this.paid,
                     subject: this.subject,
                 })
-                .then((_) => this.$router.push('/clients'))
+                .then((_) => this.$router.push('/bills'))
                 .catch((e) => {
                     if (e.response && e.response.status === 409)
                         this.exists = true
