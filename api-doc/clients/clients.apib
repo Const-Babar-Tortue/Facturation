@@ -92,8 +92,33 @@
 
 + Response 404 (application/json)
     + Attributes (object)
-        + message: Client does not exists (string)   
+        + message: Client does not exists (string)
         
+### Get a client [GET]
+
++ Request (application/json)
+    + Headers
+
+            Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
+
++ Response 200 (application/json)
+    + Body
+    
+            {
+                "id": 14,
+                "name": "Marianne Greenfelder",
+                "street": "Shanon Manor",
+                "streetNumber": "25372",
+                "postalCode": 35182,
+                "city": "Lake Manonton",
+                "firm": true,
+                "vatNumber": "QGYIAZT1"
+            }
+            
++ Response 404 (application/json)
+    + Attributes (object)
+        + message: Client does not exists (string)
+
 
 ## Client Names [/clients/names]
 
