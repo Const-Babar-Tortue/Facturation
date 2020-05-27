@@ -4,39 +4,52 @@
             title="Clients"
             destination="/clients/create"
             :items="clients"
-            :fields="['id', 'name', 'firm', 'actions']"
-            :delete-item="deleteItem"
-        />
+        >
+            <template v-slot>
+                <b-table
+                    class="m-0"
+                    responsive=""
+                    striped
+                    hover
+                    :items="clients"
+                    :fields="fields"
+                >
+                    <template v-slot:cell(paid)="row">
+                        <b-badge v-if="row.item.paid" variant="success">
+                            Yes
+                        </b-badge>
+                        <b-badge v-else variant="danger">No</b-badge>
+                    </template>
+                    <template v-slot:cell(actions)="row">
+                        <b-button size="sm" @click="deleteClient(row.item)">
+                            Delete
+                        </b-button>
+                    </template>
+                </b-table>
+            </template>
+        </DataTable>
     </b-container>
 </template>
 
 <script>
+import { mapState, mapActions } from 'vuex'
 import DataTable from '@/components/DataTable'
 
 export default {
     name: 'Clients',
     components: { DataTable },
     data: () => ({
-        clients: [],
+        selectedItem: null,
+        fields: ['id', 'name', 'firm', 'actions'],
     }),
+    computed: {
+        ...mapState('clients', { clients: (state) => state.clients }),
+    },
     mounted() {
-        this.$axios.get('/clients').then(({ data }) => (this.clients = data))
+        this.$store.dispatch('clients/load')
     },
     methods: {
-        deleteItem(client) {
-            this.$axios
-                .delete('/clients', {
-                    data: {
-                        id: client.id,
-                    },
-                })
-                .then(
-                    (_) =>
-                        (this.clients = this.clients.filter(
-                            (e) => e.id !== client.id
-                        ))
-                )
-        },
+        ...mapActions({ deleteClient: 'clients/delete' }),
     },
     head: () => ({
         title: 'Clients',

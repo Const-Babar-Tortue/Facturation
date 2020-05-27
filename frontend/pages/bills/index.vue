@@ -1,11 +1,6 @@
 <template>
     <b-container>
-        <DataTable
-            title="Bills"
-            destination="/bills/create"
-            :items="bills"
-            :delete-item="deleteBill"
-        >
+        <DataTable title="Bills" destination="/bills/create" :items="bills">
             <template v-slot>
                 <b-table
                     class="m-0"
@@ -40,7 +35,7 @@ import { mapState, mapActions } from 'vuex'
 import DataTable from '@/components/DataTable'
 
 export default {
-    name: 'Index',
+    name: 'Bills',
     components: { DataTable },
     data: () => ({
         selectedItem: null,
@@ -62,17 +57,6 @@ export default {
     },
     methods: {
         ...mapActions({ deleteBill: 'bills/delete', toggle: 'bills/toggle' }),
-        askForDeletion(item) {
-            this.$root.$emit('bv::show::modal', 'modal')
-        },
-        confirm() {
-            this.$bvModal.hide('modal')
-            this.deleteItem(this.selectedItem)
-        },
-        cancel() {
-            this.$bvModal.hide('modal')
-            this.selectedItem = null
-        },
     },
     head: () => ({
         title: 'Bills',
