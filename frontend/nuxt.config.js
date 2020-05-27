@@ -92,6 +92,7 @@ export default ({ command }) => ({
                         method: 'get',
                         propertyName: 'user',
                     },
+                    logout: false,
                 },
                 autoFetchUser: true,
             },
