@@ -24,7 +24,7 @@ export const actions = {
         this.$axios.delete(`/bills/${id}`).then((_) => commit('delete', id))
     },
     toggle({ commit }, { id }) {
-        commit('toggle', id)
+        this.$axios.patch(`/bills/${id}`).then((_) => commit('toggle', id))
     },
 }
 
