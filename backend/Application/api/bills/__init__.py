@@ -1,5 +1,5 @@
 import dateutil.parser
-from flask import jsonify, flash
+from flask import jsonify
 from flask_jwt import jwt_required
 from flask_restful import Resource, reqparse
 
