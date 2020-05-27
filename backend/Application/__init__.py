@@ -4,6 +4,7 @@ from flask_jwt import JWT
 from flask_restful import Api
 from flask_sqlalchemy import SQLAlchemy
 
+
 db = SQLAlchemy()
 
 # API
@@ -12,6 +13,7 @@ from .api.clients import Clients
 from .api.clientsnames import ClientsNames
 from .api.users import Users
 from .api.bills import Bills
+from .api.bills.singlebill import SingleBill
 
 app = Flask(__name__, instance_relative_config=False)
 api = Api(app)
@@ -30,10 +32,16 @@ def init_app():
 
         JWT(app, authenticate, identity)
 
+    # User resources
     api.add_resource(Register, "/register")
+    api.add_resource(Users, "/user/me")
+
+    # Client resources
     api.add_resource(Clients, "/clients")
     api.add_resource(ClientsNames, "/clients/names")
-    api.add_resource(Users, "/user/me")
+
+    # Bill resources
     api.add_resource(Bills, "/bills")
+    api.add_resource(SingleBill, "/bills/<int:bill_id>")
 
     return app

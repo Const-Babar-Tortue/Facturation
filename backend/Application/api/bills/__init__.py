@@ -58,25 +58,6 @@ class Bills(Resource):
         response.status_code = 201
         return response
 
-    def delete(self):
-        args = delete_parser.parse_args()
-
-        id = args["id"]
-
-        existing_bill = Bill.query.filter(Bill.id == id).first()
-
-        if existing_bill is None:
-            response = jsonify({"message": "Bill does not exists"})
-            response.status_code = 404
-            return response
-
-        Bill.query.filter(Bill.id == id).delete()
-        db.session.commit()
-
-        response = jsonify({"message": "Deleted"})
-        response.status_code = 200
-        return response
-
 
 def calculate_vat(amount):
     return amount * 0.21
