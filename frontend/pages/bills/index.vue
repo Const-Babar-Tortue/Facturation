@@ -16,13 +16,14 @@
                             Date: {{ info.date }}
                         </b-list-group-item>
                         <b-list-group-item>
-                            Date: {{ info.expiration }}
+                            Expiration date: {{ info.expiration }}
                         </b-list-group-item>
                         <b-list-group-item>
-                            Date: {{ info.paid }}
+                            Paid: {{ info.paid }}
                         </b-list-group-item>
                         <b-list-group-item>
-                            Date: {{ info.price }}
+                            Price: {{ info.price }}€, with VAT:
+                            {{ (info.price * 1.21).toFixed(2) }}€
                         </b-list-group-item>
                     </b-list-group>
                     <div class="d-block text-center">
