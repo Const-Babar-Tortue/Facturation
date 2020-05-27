@@ -88,3 +88,24 @@
 + Response 404 (application/json)
     + Attributes (object)
         + message: Bill does not exists (string) 
+
+### Toggle a bill paid state [PATCH]
+
++ Request (application/json)
+   
+    + Headers
+
+            Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
+
+
++ Response 200 (application/json)
+    + Attributes (object)
+        + message: Bill is now paid (string)
+        
++ Response 200 (application/json)
+    + Attributes (object)
+        + message: Bill is unpaid (string)
+
++ Response 404 (application/json)
+    + Attributes (object)
+        + message: Bill does not exists (string) 
