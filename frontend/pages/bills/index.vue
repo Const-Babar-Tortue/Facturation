@@ -40,13 +40,13 @@ export default {
     data: () => ({
         selectedItem: null,
         fields: [
-            'id',
-            'subject',
-            'price',
-            'paid',
-            'date',
-            'expiration',
-            'actions',
+            { key: 'id', sortable: true },
+            { key: 'subject', sortable: true },
+            { key: 'price', sortable: true },
+            { key: 'paid', sortable: true },
+            { key: 'date', sortable: true },
+            { key: 'expiration', sortable: true },
+            { key: 'actions', sortable: false },
         ],
     }),
     computed: {

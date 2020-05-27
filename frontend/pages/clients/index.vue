@@ -40,7 +40,12 @@ export default {
     components: { DataTable },
     data: () => ({
         selectedItem: null,
-        fields: ['id', 'name', 'firm', 'actions'],
+        fields: [
+            { key: 'id', sortable: true },
+            { key: 'name', sortable: true },
+            { key: 'firm', sortable: true },
+            { key: 'actions', sortable: false },
+        ],
     }),
     computed: {
         ...mapState('clients', { clients: (state) => state.clients }),
