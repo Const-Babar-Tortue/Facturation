@@ -4,7 +4,6 @@ from flask_restful import Resource, reqparse
 
 from Application import db
 from Application.models.ClientTable import Client
-from Application.models.BillTable import Bill
 
 create_parser = reqparse.RequestParser()
 create_parser.add_argument("name", type=str, required=True)
@@ -66,30 +65,6 @@ class Clients(Resource):
 
         response = jsonify({"message": "Created"})
         response.status_code = 201
-
-        return response
-
-    def delete(self):
-        args = delete_parser.parse_args()
-
-        id = args["id"]
-
-        existing_client = Client.query.filter(Client.id == id).first()
-
-        if existing_client is None:
-            response = jsonify({"message": "Client does not exists"})
-            response.status_code = 404
-            return response
-
-        # delete all bills related to this client
-        Bill.query.filter(Bill.client_id == id).delete()
-
-        # delete the client itself
-        Client.query.filter(Client.id == id).delete()
-        db.session.commit()
-
-        response = jsonify({"message": "Deleted"})
-        response.status_code = 200
 
         return response
 

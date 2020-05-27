@@ -9,9 +9,13 @@ db = SQLAlchemy()
 
 # API
 from .api.register import Register
-from .api.clients import Clients
-from .api.clientsnames import ClientsNames
 from .api.users import Users
+
+
+from .api.clients import Clients
+from .api.clients.names import ClientsNames
+from .api.clients.singleclient import SingleClient
+
 from .api.bills import Bills
 from .api.bills.singlebill import SingleBill
 
@@ -38,6 +42,7 @@ def init_app():
 
     # Client resources
     api.add_resource(Clients, "/clients")
+    api.add_resource(SingleClient, "/clients/<int:client_id>")
     api.add_resource(ClientsNames, "/clients/names")
 
     # Bill resources
